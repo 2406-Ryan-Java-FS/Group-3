@@ -1,7 +1,13 @@
 # Group-3
 
+### what application is about
 Banking or Eccomerce or Revature paid training Application:
 
+### what technologies are required for the application
+API built with Java 17+ and Spring Boot 3+
+UI built with React with TypeScript/JavaScript
+
+### stories (pending approval)
 Users can Create new accounts;
 Users can Read and search own account details;
 Users can update to and from an account wallet;
@@ -24,3 +30,9 @@ Tables: Review, User, Item table,
 Review- item_id, review_id, text
 User - Name, money, account type
 Item table - Name, item_id, cost
+
+
+### how to run the application
+
+
+### any relevant information for a new team to pick up the project
