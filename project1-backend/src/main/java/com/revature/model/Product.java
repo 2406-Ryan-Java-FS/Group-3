@@ -19,18 +19,18 @@ public class Product {
 
     private float price;
 
-    private String category;
+    private int category_id;
 
     public Product() {
 
     }
 
-    public Product(Long id, String name, String description, float price, String category){
+    public Product(Long id, String name, String description, float price, int category_id){
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.category = category;
+        this.category_id = category_id;
     }
 
     public Long getId() {
@@ -65,12 +65,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", category='" + category + '\'' +
+                ", category_id=" + category_id +
                 '}';
     }
 
@@ -89,11 +89,11 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Float.compare(price, product.price) == 0 && Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(category, product.category);
+        return Float.compare(price, product.price) == 0 && category_id == product.category_id && Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(description, product.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, category);
+        return Objects.hash(id, name, description, price, category_id);
     }
 }
