@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="Users",schema="project1")
+@Table(name="users",schema="project1")
 public class User
 {
     @Id
@@ -21,7 +21,20 @@ public class User
     private Date tokenExpiresOn;
     private String tokenId;         //used for lookup
     private String tokenPassword;   //used for validation
-    
+
+    public User() {}
+
+    public User(Integer userId, String name, String password, String role, Date tokenIssuedOn, Date tokenExpiresOn, String tokenId, String tokenPassword) {
+        this.userId = userId;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.tokenIssuedOn = tokenIssuedOn;
+        this.tokenExpiresOn = tokenExpiresOn;
+        this.tokenId = tokenId;
+        this.tokenPassword = tokenPassword;
+    }
+
     public Integer getUserId() {
         return userId;
     }
