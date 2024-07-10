@@ -60,6 +60,7 @@ Long id pk
 String name
 String description
 Decimal price
+Category category 
 
 3. Category
 Long id pk
@@ -69,9 +70,12 @@ String name
 Long id pk
 Long userId
 String status
+created_at TIMESTAMP
 
 5. OrderItem 
 Long id pk
+Order order
+Product product
 Integer quantity
 
 Allocation
