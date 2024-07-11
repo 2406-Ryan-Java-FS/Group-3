@@ -9,28 +9,30 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/products")
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
+//    @Autowired
     ProductService ps;
 
-//    @Autowired
-//    public ProductController(ProductService ps) {
-//        this.ps = ps;
-//    }
+    @Autowired
+    public ProductController(ProductService ps) {
+        this.ps = ps;
+    }
 
     @GetMapping
     public List<Product> getAllProducts() {
-
-        System.out.println("Hitting endpoint");
         return ps.getAllProducts();
     }
 
     @GetMapping("/{id}")
-    public  Product getProduct(@PathVariable Long id) {
+    public  Product getProduct(@PathVariable int id) {
         return ps.getProductById(id);
+    }
+
+    public List<Product> getProductByName(@RequestParam String name) {
+        return ps.getProductByName(name);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
@@ -41,7 +43,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateItem(@PathVariable Long id, @RequestBody Product p) {
+    public ResponseEntity<Product> updateItem(@PathVariable int id, @RequestBody Product p) {
         p.setId(id);
         Product p2 = ps.getProductById(id);
         if(p2.getId() == id) {
@@ -53,7 +55,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Boolean> deleteProduct(@PathVariable int id) {
         boolean wasDeleted = ps.deleteProduct(id);
         return new ResponseEntity<>(wasDeleted? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND);
     }

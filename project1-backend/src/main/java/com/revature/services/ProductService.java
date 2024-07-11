@@ -10,20 +10,18 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    @Autowired
+//    @Autowired
     ProductRepo pr;
 
-//    @Autowired
-//    public  ProductService(ProductRepo pr) {
-//        this.pr = pr;
-//    }
+    @Autowired
+    public  ProductService(ProductRepo pr) { this.pr = pr;  }
 
     public List<Product> getAllProducts() {
         return pr.findAll();
     }
 
-    public Product getProductById(Long id) {
-        return pr.findById(Math.toIntExact(id)).orElseGet(Product::new);
+    public Product getProductById(int id) {
+        return pr.findById(id).orElseGet(Product::new);
     }
 
     public Product addProduct(Product p) {
@@ -34,9 +32,9 @@ public class ProductService {
         return pr.save(update);
     }
 
-    public boolean deleteProduct(Long id) {
+    public boolean deleteProduct(int id) {
         try {
-            pr.deleteById(Math.toIntExact(id));
+            pr.deleteById(id);
             return true;
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -44,4 +42,5 @@ public class ProductService {
         }
     }
 
+    public List<Product> getProductByName(String name) { return pr.findByName(name); }
 }
