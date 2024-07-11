@@ -1,60 +1,55 @@
 package com.revature.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.sql.Date;
+//import javax.persistence.*;
+import jakarta.persistence.*;
 
-import java.util.Objects;
 
 @Entity
-@Table(name = "users")
-public class User {
-
+@Table(name="users",schema="project1")
+public class User
+{
     @Id
-    @Column
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer userId;
 
-    @Column
-    private String username;
-
-    @Column
+    private String name;
     private String password;
-
-    @Column
     private String role;
 
-    public User(){
+    private Date tokenIssuedOn;
+    private Date tokenExpiresOn;
+    private String tokenId;         //used for lookup
+    private String tokenPassword;   //used for validation
 
-    }
+    public User() {}
 
-    public User(long id, String username, String password, String role){
-        this.id = id;
-        this.username = username;
+    public User(Integer userId, String name, String password, String role, Date tokenIssuedOn, Date tokenExpiresOn, String tokenId, String tokenPassword) {
+        this.userId = userId;
+        this.name = name;
         this.password = password;
         this.role = role;
+        this.tokenIssuedOn = tokenIssuedOn;
+        this.tokenExpiresOn = tokenExpiresOn;
+        this.tokenId = tokenId;
+        this.tokenPassword = tokenPassword;
     }
 
-    public long getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
-
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -67,26 +62,30 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+    public Date getTokenIssuedOn() {
+        return tokenIssuedOn;
+    }
+    public void setTokenIssuedOn(Date tokenIssuedOn) {
+        this.tokenIssuedOn = tokenIssuedOn;
+    }
+    public Date getTokenExpiresOn() {
+        return tokenExpiresOn;
+    }
+    public void setTokenExpiresOn(Date tokenExpiresOn) {
+        this.tokenExpiresOn = tokenExpiresOn;
+    }
+    public String getTokenId() {
+        return tokenId;
+    }
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
+    }
+    public String getTokenPassword() {
+        return tokenPassword;
+    }
+    public void setTokenPassword(String tokenPassword) {
+        this.tokenPassword = tokenPassword;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(role, user.role);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, password, role);
-    }
+    
 }
