@@ -1,10 +1,21 @@
 -- Create the user table
 create table users (
-	id serial primary key,
-	username varchar(50) unique not null,
-	password varchar(255) not null,
-	role varchar(20) not null
-);
+        token_expires_on date,
+        token_issued_on date,
+        user_id serial,
+        name varchar(255),
+        password varchar(255),
+        role varchar(255),
+        token_id varchar(255),
+        token_password varchar(255),
+        primary key (user_id)
+    );
+
+    -- Create the categories table
+    create table categories (
+    	id serial primary key,
+    	name varchar(50) not null
+    );
 
 -- Create the products table
 create table products (
@@ -14,12 +25,6 @@ create table products (
 	price decimal(10,2) not null,
 	category_id int,
 	foreign key (category_id) references categories(id)
-);
-
--- Create the categories table
-create table categories (
-	id serial primary key,
-	name varchar(50) not null
 );
 
 -- Create the orders table
