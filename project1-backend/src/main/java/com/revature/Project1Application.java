@@ -17,11 +17,11 @@ public class Project1Application {
 		SpringApplication.run(Project1Application.class, args);
 	}
 
-	//Just making sure this jar knows about it's database
-	@Value("${DB_NAME}") private String dbName;
-
-	@PostConstruct
-	public void printStuff(){
-		logger.info("DB_NAME="+this.dbName);
-	}
+//	//Just making sure this jar knows about it's database
+//	@Value("${DB_NAME}") private String dbName;
+//
+//	@PostConstruct
+//	public void printStuff(){
+//		logger.info("DB_NAME="+this.dbName);
+//	}
 }
