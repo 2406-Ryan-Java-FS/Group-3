@@ -23,6 +23,8 @@ public class ProductController {
 
     @GetMapping
     public List<Product> getAllProducts() {
+
+        System.out.println("Hitting endpoint");
         return ps.getAllProducts();
     }
 
