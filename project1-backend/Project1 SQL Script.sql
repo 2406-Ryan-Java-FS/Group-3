@@ -50,6 +50,4 @@ select * from users;
 select * from products;
 select * from categories;
 select * from orders;
-select * from order_item; 
-
-
+select * from order_item;
