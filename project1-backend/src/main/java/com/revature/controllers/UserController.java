@@ -19,6 +19,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @GetMapping
+    public String home(){
+        return "<h1>project1 backend is running</h1>";
+    }
+
     @GetMapping("findAll")
     public List<User> findAll(){
 
