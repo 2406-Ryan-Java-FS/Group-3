@@ -56,14 +56,14 @@ String password
 String role
 
 2. Product 
-Long id pk
+int id pk
 String name
 String description
 Decimal price
 Category category 
 
 3. Category
-Long id pk
+int id pk
 String name
 
 4. Order 
