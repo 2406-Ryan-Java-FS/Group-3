@@ -16,23 +16,20 @@ public class User
     private String name;
     private String password;
     private String role;
+    private String secretInformation;//used to make sure others are denied access
 
     private Date tokenIssuedOn;
     private Date tokenExpiresOn;
     private String tokenId;         //used for lookup
     private String tokenPassword;   //used for validation
 
-    public User() {}
 
-    public User(Integer userId, String name, String password, String role, Date tokenIssuedOn, Date tokenExpiresOn, String tokenId, String tokenPassword) {
-        this.userId = userId;
-        this.name = name;
-        this.password = password;
-        this.role = role;
-        this.tokenIssuedOn = tokenIssuedOn;
-        this.tokenExpiresOn = tokenExpiresOn;
-        this.tokenId = tokenId;
-        this.tokenPassword = tokenPassword;
+    public String getSecretInformation() {
+        return secretInformation;
+    }
+
+    public void setSecretInformation(String secretInformation) {
+        this.secretInformation = secretInformation;
     }
 
     public Integer getUserId() {
