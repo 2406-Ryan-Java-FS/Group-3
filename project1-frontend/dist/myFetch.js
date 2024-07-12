@@ -1,8 +1,9 @@
 
+/*
+    Fetch method customized for hitting our endpoints
+*/
 async function myFetch(method,endpoint,returnJsonBody,additionalHeaders,postData)
 {
-    // Browser runtime
-    ///basicRegistration must be hard coded here at compile time
     const response=await fetch(endpoint,
     {
         "method":method,
@@ -17,14 +18,11 @@ async function myFetch(method,endpoint,returnJsonBody,additionalHeaders,postData
         let body=await response.json()
         if(body==undefined) 				throw new Error("response json body was undefined")
         if(body.errorMessages==undefined) 	throw new Error("response json body errorMessages was undefined")
-        throw new Error(body.errorMessages)
+        throw new Error(body.errorMessage)
     }
     else if(response.status!=200)
     {
         throw new Error([response.status,response.statusText,response.url])
-        // globalDialogModalPopup('invalid',
-        // [response.status,response.statusText,response.url])
-        // throw new Error(response.statusText)
     }
 
     if(returnJsonBody){
