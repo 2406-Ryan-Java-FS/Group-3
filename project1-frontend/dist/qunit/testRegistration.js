@@ -12,7 +12,7 @@ QUnit.test("testRegistration",async function(assert)
         secretInformation:"This is only accessible to this user"
     }
 
-    const newUserCreated=await myFetch(`/users`,`POST`,true,null,userToCreate)
+    const newUserCreated=await myFetch(`POST`,`/users`,true,null,userToCreate)
     assert.true(newUserCreated.userId>0,"new user id was something")
     assert.equals(userToCreate.name,newUserCreated.name,"name matches")
     assert.equals("",newUserCreated.name,"responded password is gone. good.")

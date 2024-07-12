@@ -65,7 +65,7 @@ location /project1/ {
 	try_files $uri $uri/ =404;
 }
 
-Goto command line or gitbash and start nginx
+Goto command line or gitbash and start nginx from your home folder ~
 start nginx
 
 In the browser, on port 80, goto localhost/project1/index.html
