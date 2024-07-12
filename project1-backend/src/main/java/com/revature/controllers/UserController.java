@@ -1,14 +1,14 @@
 package com.revature.controllers;
 
 import com.revature.Project1Application;
+import com.revature.model.AnyResponse;
 import com.revature.model.User;
+import com.revature.services.UserAccountService;
 import com.revature.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ public class UserController {
 
     private static final Logger logger= LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    UserService userService;
+    @Autowired UserService userService;
+    @Autowired UserAccountService userAccountService;
 
 //    @GetMapping
 //    public String home(){
@@ -28,7 +28,23 @@ public class UserController {
 
     @GetMapping
     public List<User> findAll(){
-
         return userService.findAll();
+    }
+
+    @PostMapping("register")
+    public User register(@RequestBody User newUserToCreate) {
+        return userAccountService.register(newUserToCreate);
+    }
+
+    @PostMapping("login")
+    public User login(@RequestHeader("username") String username,
+                      @RequestHeader("password") String password)
+    {
+        return userAccountService.login(username,password);
+    }
+
+    @GetMapping("my-private-info")
+    public AnyResponse myPrivateInfo(@ModelAttribute("loggedInUser") User loggedInUser){
+        return userAccountService.myPrivateInfo(loggedInUser);
     }
 }

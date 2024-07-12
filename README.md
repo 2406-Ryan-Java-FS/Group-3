@@ -34,5 +34,45 @@ Item table - Name, item_id, cost
 
 ### how to run the application
 
-
 ### any relevant information for a new team to pick up the project
+
+nginx gateway can be useful for local development and on the server
+
+### Using nginx gateway to serve frontend files and proxy requests to running backend jars
+
+WHY?
+So you can edit and serve frontend files even when your backend is not working.
+So you can proxy many requests from a frontend to any backend. microservice ideas.
+So you can avoid CORS errors because the browser is going through the same port, 80.
+So can easily setup https on your server in the future.
+
+Download stable nginx command line tool https://nginx.org/en/download.html
+
+Extract files to your home folder ~/
+
+create and place nginx.exe into a bin folder at ~/bin/nginx.exe
+
+open ~/conf/nginx.conf to configure it for proxying requests
+
+Inside nginx.conf within http {} section, within server {} section, add two locations to redirect:
+
+location /project1-back/ {
+	proxy_pass http://localhost:8080/;
+}
+
+location /project1/ {
+	alias C:/Users/YOURNAME/Group-3/project1-frontend/dist/;
+	try_files $uri $uri/ =404;
+}
+
+Goto command line or gitbash and start nginx from your home folder ~
+start nginx
+
+In the browser, on port 80, goto localhost/project1/index.html
+
+When changes are made to nginx.conf, reload the config using:
+nginx -s reload
+
+If you see this error, start nginx
+nginx: [error] OpenEvent("Global\ngx_reload_9456") failed (2: The system cannot find the file specified)
+
