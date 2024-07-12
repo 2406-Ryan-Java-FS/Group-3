@@ -35,7 +35,8 @@ public class LoginAdvice {
         logger.info("");
         logger.info("------"+everyRequest.getRequestURI()+"------");
         //Thread.sleep(500);
-        if(everyRequest.getRequestURI().equals("/login"))return null;//ignore this endpoint
+        if(everyRequest.getRequestURI().equals("/users/login"))       return null;//ignore this endpoint
+        if(everyRequest.getRequestURI().equals("/users/register"))    return null;//and this one
 
         if(StringUtils.isEmpty(everyRequest.getHeader("tokenId")))
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"session tokenId required");

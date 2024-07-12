@@ -27,7 +27,6 @@ public class User
     public String getSecretInformation() {
         return secretInformation;
     }
-
     public void setSecretInformation(String secretInformation) {
         this.secretInformation = secretInformation;
     }

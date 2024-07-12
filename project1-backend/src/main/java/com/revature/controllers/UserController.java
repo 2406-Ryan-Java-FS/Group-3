@@ -5,6 +5,7 @@ import com.revature.model.AnyResponse;
 import com.revature.model.User;
 import com.revature.services.UserAccountService;
 import com.revature.services.UserService;
+import org.hibernate.mapping.Any;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,6 @@ public class UserController {
 //    public String home(){
 //        return "<h1>project1 backend is running</h1>";
 //    }
-
-    @GetMapping
-    public List<User> findAll(){
-        return userService.findAll();
-    }
 
     @PostMapping("register")
     public User register(@RequestBody User newUserToCreate) {

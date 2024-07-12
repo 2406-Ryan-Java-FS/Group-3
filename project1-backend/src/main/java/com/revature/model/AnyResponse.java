@@ -10,12 +10,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnyResponse
 {
+    private String anyMessage;
     private String secretInformation;
 
+    public AnyResponse(){}//java
+
+    public AnyResponse(String anyMessage) {
+        this.anyMessage = anyMessage;
+    }
+
+    public String getAnyMessage() {
+        return anyMessage;
+    }
+    public void setAnyMessage(String anyMessage) {
+        this.anyMessage = anyMessage;
+    }
     public String getSecretInformation() {
         return secretInformation;
     }
-
     public void setSecretInformation(String secretInformation) {
         this.secretInformation = secretInformation;
     }
