@@ -28,14 +28,23 @@ create table products (
 	foreign key (category_id) references categories(id)
 );
 
+    -- Create the addresses table
+    create table addresses (
+    	address_id serial primary key,
+    	address varchar(250) not null,
+	    user_id int not null,
+	    foreign key (user_id) references users(user_id)
+    );
 
 -- Create the orders table
 create table orders (
 	id serial primary key,
 	user_id int not null,
 	status varchar(50) not null,
+	address_id int not null,
 	create_at timestamp default current_timestamp,
-	foreign key (user_id) references users(user_id)
+	foreign key (user_id) references users(user_id),
+	foreign key (address_id) references addresses(address_id)
 );
 
 
@@ -101,22 +110,30 @@ VALUES
 ('Lipstick', 'Matte finish lipstick in various shades', 14.99, 9),
 ('Organic Apples', 'Fresh organic apples from local farms', 3.99, 10);
 
+-----INSERT INTO addresses
+INSERT INTO addresses (address, user_id)
+VALUES
+('1234 best way', 1),
+('1235 best st', 2),
+('1212 north way', 1),
+('1231 best way', 4),
+('12 east way', 1),
+('13 best way', 3);
+
 
 -----INSERT INTO orders
-INSERT INTO orders (user_id, status)
+INSERT INTO orders (user_id, status, address_id)
 VALUES
-(1, 'pending'),
-(2, 'shipped'),
-(3, 'delivered'),
-(4, 'pending'),
-(5, 'canceled'),
-(6, 'shipped'),
-(7, 'delivered'),
-(8, 'returned'),
-(9, 'pending'),
-(10, 'shipped');
-
-
+(1, 'pending', 2),
+(2, 'shipped', 1),
+(3, 'delivered', 5),
+(4, 'pending', 2),
+(5, 'canceled', 4),
+(6, 'shipped', 2),
+(7, 'delivered', 1),
+(8, 'returned', 3),
+(9, 'pending', 2),
+(10, 'shipped', 2);
 
 
 
@@ -141,6 +158,8 @@ select * from products;
 select * from categories;
 select * from orders;
 select * from order_item;
+select * from addresses;
+
 
 ---Drop Statements
 DROP TABLE IF EXISTS users, products, categories, addresses, orders,order_item;
