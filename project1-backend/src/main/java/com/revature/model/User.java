@@ -25,6 +25,17 @@ public class User
     private String tokenId;         //used for lookup
     private String tokenPassword;   //used for validation
 
+    public User userWithoutSensitiveInfo()
+    {
+        this.setPassword(null);
+        this.setSecretInformation(null);
+        return this;
+    }
+
+    public User userWithoutPassord(){
+        this.setPassword(null);
+        return this;
+    }
 
     public String getSecretInformation() {
         return secretInformation;

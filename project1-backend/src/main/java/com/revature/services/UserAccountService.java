@@ -3,11 +3,18 @@ package com.revature.services;
 import com.revature.model.AnyResponse;
 import com.revature.model.User;
 import com.revature.repositories.UserRepo;
+import com.revature.util.Help;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
+import java.time.Year;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.List;
 
 /*
     Functionality for user accounts creation and login
@@ -30,13 +37,33 @@ public class UserAccountService {
 
         newUserToCreate.setRole("UNDERLING");
         User userInDatabase=userRepo.save(newUserToCreate);
-        userInDatabase.setPassword("");
-        userInDatabase.setSecretInformation("");
-        return userInDatabase;
+
+        return userInDatabase.userWithoutSensitiveInfo();
     }
 
-    public User login(String username,String password){
-        return new User();
+    public User login(String username,String password)
+    {
+        //need to use feistel cipher for password comparison, but we'll live with this for now
+        List<User> usersFound=userRepo.findByNameAndPassword(username,password);
+
+        if(usersFound.size()==0)
+            throw new RuntimeException("Could not find a user for that username and password combination");
+        if(usersFound.size()>1)
+            throw new RuntimeException("There are too many users with that username and password combination somehow");
+
+        User loggedInUser=usersFound.get(0);
+
+        Calendar cal=Calendar.getInstance();
+        loggedInUser.setTokenIssuedOn(new Date(cal.getTimeInMillis()));
+        cal.add(Calendar.DAY_OF_YEAR,10);
+        loggedInUser.setTokenExpiresOn(new Date(cal.getTimeInMillis()));
+
+        loggedInUser.setTokenId(        Double.toString(Math.random()*Long.MAX_VALUE));
+        loggedInUser.setTokenPassword(  Double.toString(Math.random()*Long.MAX_VALUE));
+
+        userRepo.save(loggedInUser);
+
+        return loggedInUser.userWithoutSensitiveInfo();
     }
 
     public AnyResponse myPrivateInfo(User loggedInUser){

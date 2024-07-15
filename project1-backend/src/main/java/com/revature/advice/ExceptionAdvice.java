@@ -30,7 +30,7 @@ public class ExceptionAdvice {
             return new ResponseEntity<>(new ExceptionResponse(reason),HttpStatus.UNAUTHORIZED);
 
         }else {
-            logger.error(ex.getMessage());
+            logger.error(ex.toString());
             return new ResponseEntity<>(new ExceptionResponse(ex), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
