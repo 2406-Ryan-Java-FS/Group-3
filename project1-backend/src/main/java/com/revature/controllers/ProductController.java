@@ -31,6 +31,7 @@ public class ProductController {
         return ps.getProductById(id);
     }
 
+    @GetMapping("/search")
     public List<Product> getProductByName(@RequestParam String name) {
         return ps.getProductByName(name);
     }
