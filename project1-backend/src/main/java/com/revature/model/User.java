@@ -2,11 +2,13 @@ package com.revature.model;
 
 import java.sql.Date;
 //import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="users",schema="project1")
+@Table(name="users")//,schema="project1")//h2 is not creating this schema
 public class User
 {
     @Id
@@ -14,8 +16,8 @@ public class User
     private Integer userId;
 
     private String name;
-    private String password;
     private String role;
+    private String password;
     private String secretInformation;//used to make sure others are denied access
 
     private Date tokenIssuedOn;

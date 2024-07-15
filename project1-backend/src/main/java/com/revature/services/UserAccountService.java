@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.model.AnyResponse;
 import com.revature.model.User;
 import com.revature.repositories.UserRepo;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,18 @@ public class UserAccountService {
     @Autowired UserRepo userRepo;
 
     public User register(User newUserToCreate){
-        return new User();
+        if(userRepo.count()>50)
+            throw new RuntimeException("Reached user account limit. Can not create another.");
+        if(StringUtils.isEmpty(newUserToCreate.getName()))
+            throw new RuntimeException("Please provide a name for this new user");
+        if(StringUtils.isEmpty(newUserToCreate.getPassword()))
+            throw new RuntimeException("Please provide a password for this new user");
+
+        newUserToCreate.setRole("UNDERLING");
+        User userInDatabase=userRepo.save(newUserToCreate);
+        userInDatabase.setPassword("");
+        userInDatabase.setSecretInformation("");
+        return userInDatabase;
     }
 
     public User login(String username,String password){
