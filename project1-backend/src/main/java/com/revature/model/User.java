@@ -23,6 +23,8 @@ public class User
     private String tokenId;         //used for lookup
     private String tokenPassword;   //used for validation
 
+    private int money; //amount of money user has
+
 
     public String getSecretInformation() {
         return secretInformation;
@@ -84,5 +86,11 @@ public class User
         this.tokenPassword = tokenPassword;
     }
 
+    public int getMoney() {
+        return money;
+    }
+    public void setMoney(int money) {
+        this.money = money;
+    }
 
 }
