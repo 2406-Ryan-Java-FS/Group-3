@@ -66,6 +66,16 @@ public class UserAccountService {
         return loggedInUser.userWithoutSensitiveInfo();
     }
 
+    public AnyResponse logout(User loggedInUser)
+    {
+        loggedInUser.setTokenId(null);
+        loggedInUser.setTokenPassword(null);
+        loggedInUser.setTokenIssuedOn(null);
+        loggedInUser.setTokenExpiresOn(null);
+        userRepo.save(loggedInUser);
+        return new AnyResponse("You have been logged out");
+    }
+
     public AnyResponse myPrivateInfo(User loggedInUser){
         AnyResponse r=new AnyResponse();
         r.setSecretInformation(loggedInUser.getSecretInformation());

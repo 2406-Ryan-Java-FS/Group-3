@@ -1,5 +1,5 @@
 
-/*
+/**
     Fetch method customized for hitting our endpoints
 */
 async function myFetch(method,endpoint,returnJsonBody,additionalHeaders,postData)

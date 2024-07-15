@@ -48,8 +48,14 @@ QUnit.test("testRegistration",async function(assert)
     let response=await myFetch(`GET`,`/project1-back/users/my-private-info`,false,
         {tokenId:"guessingTheTokenId",tokenPassword:"guessingTheTokenPassword"},null)
     assert.equal(response.status,401,"Expected 401 response status returned")
-    assert.equal(await response.json().errorMessage,"No Valid session for account within database","No valid session for this user")
-    assert.equal(await response.json().secretInformation,null,"secretInformation was not revealed")
+    let body2=await response.json()
+    assert.equal(body2.errorMessage,"No Valid session for account within database","No valid session for this user")
+    assert.equal(body2.secretInformation,null,"secretInformation was not revealed")
     
-   
+   /*
+        Successfully logout the logged in user
+   */
+    let bodyLogout=await myFetch(`POST`,`/project1-back/users/logout`,true,
+        {tokenId:loggedInUser.tokenId,tokenPassword:loggedInUser.tokenPassword},null)
+    assert.equal(bodyLogout.message,"You have been logged out","logout worked great")
 })

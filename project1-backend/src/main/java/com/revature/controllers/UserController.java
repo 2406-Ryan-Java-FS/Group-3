@@ -39,6 +39,11 @@ public class UserController {
         return userAccountService.login(username,password);
     }
 
+    @PostMapping("logout")
+    public AnyResponse logout(@ModelAttribute("loggedInUser") User loggedInUser){
+        return userAccountService.logout(loggedInUser);
+    }
+
     @GetMapping("my-private-info")
     public AnyResponse myPrivateInfo(@ModelAttribute("loggedInUser") User loggedInUser){
         return userAccountService.myPrivateInfo(loggedInUser);
