@@ -9,6 +9,7 @@ create table users (
         secret_information varchar(255),
         token_id varchar(255),
         token_password varchar(255),
+        money int,
         primary key (user_id)
     );
 
@@ -67,18 +68,18 @@ create table order_item (
 
 
 -----INSERT INTO USERS
-INSERT INTO users (token_expires_on, token_issued_on, name, password, role, secret_information, token_id, token_password)
+INSERT INTO users (token_expires_on, token_issued_on, name, password, role, secret_information, token_id, token_password, money)
 VALUES
-('2024-12-31', '2024-01-01', 'ola', 'ola123password', 'admin', 'test', 'token123', 'tokenpass123'),
-('2024-12-31', '2024-01-02', 'Bob', 'bob456password', 'user', 'test','token124', 'tokenpass124'),
-('2024-12-31', '2024-01-03', 'jeet', 'jeet789password', 'user', 'test','token125', 'tokenpass125'),
-('2024-12-31', '2024-01-04', 'Diana', 'diana012password', 'user', 'test','token126', 'tokenpass126'),
-('2024-12-31', '2024-01-05', 'Eve', 'eve345password', 'admin', 'test','token127', 'tokenpass127'),
-('2024-12-31', '2024-01-06', 'Eric', 'eric678password', 'user', 'test','token128', 'tokenpass128'),
-('2024-12-31', '2024-01-07', 'Grace', 'grace901password', 'user', 'test','token129', 'tokenpass129'),
-('2024-12-31', '2024-01-08', 'Heidi', 'heidi234password', 'user', 'test','token130', 'tokenpass130'),
-('2024-12-31', '2024-01-09', 'Ivan', 'ivan567password', 'admin', 'test','token131', 'tokenpass131'),
-('2024-12-31', '2024-01-10', 'Judy', 'judy890password', 'user', 'test','token132', 'tokenpass132');
+('2024-12-31', '2024-01-01', 'ola', 'ola123password', 'admin', 'test', 'token123', 'tokenpass123', 10000),
+('2024-12-31', '2024-01-02', 'Bob', 'bob456password', 'user', 'test','token124', 'tokenpass124', 13),
+('2024-12-31', '2024-01-03', 'jeet', 'jeet789password', 'user', 'test','token125', 'tokenpass125', 166),
+('2024-12-31', '2024-01-04', 'Diana', 'diana012password', 'user', 'test','token126', 'tokenpass126', 389),
+('2024-12-31', '2024-01-05', 'Eve', 'eve345password', 'admin', 'test','token127', 'tokenpass127', 8098),
+('2024-12-31', '2024-01-06', 'Eric', 'eric678password', 'user', 'test','token128', 'tokenpass128', 2),
+('2024-12-31', '2024-01-07', 'Grace', 'grace901password', 'user', 'test','token129', 'tokenpass129', 3999),
+('2024-12-31', '2024-01-08', 'Heidi', 'heidi234password', 'user', 'test','token130', 'tokenpass130', 2000),
+('2024-12-31', '2024-01-09', 'Ivan', 'ivan567password', 'admin', 'test','token131', 'tokenpass131', 3000),
+('2024-12-31', '2024-01-10', 'Judy', 'judy890password', 'user', 'test','token132', 'tokenpass132', 4000);
 
 
 -----INSERT INTO categories
