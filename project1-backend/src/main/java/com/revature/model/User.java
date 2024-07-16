@@ -96,5 +96,5 @@ public class User
         this.tokenPassword = tokenPassword;
     }
 
-    
+
 }
