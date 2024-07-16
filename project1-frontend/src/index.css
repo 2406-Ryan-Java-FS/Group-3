@@ -1,0 +1,10 @@
+body{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(190, 159, 92);
+}
+
+nav{
+    background-color: rgb(157, 131, 75);
+    padding: 12px;
+    border-radius: 5px;
+}
