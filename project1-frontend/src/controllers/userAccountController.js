@@ -12,6 +12,24 @@
 export default class userAccountController
 {
     loggedInUser=null
-
     
+    static register(username,password)
+    {
+        console.log(`register ${username} ${password}`)
+    }
+
+    static login(username,password)
+    {
+        console.log(`login ${username} ${password}`)
+    }
+
+    static logout()
+    {
+
+    }
+
+    static myPrivateInfo()
+    {
+
+    }
 }
