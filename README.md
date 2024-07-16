@@ -1,13 +1,10 @@
-# Group-3
+# Eccomerce Application:
 
-### what application is about
-Banking or Eccomerce or Revature paid training Application:
-
-### what technologies are required for the application
+## what technologies are required for the application
 API built with Java 17+ and Spring Boot 3+
 UI built with React with TypeScript/JavaScript
 
-### stories (pending approval)
+## Stories
 Users can Create new accounts;
 Users can Read and search own account details;
 Users can update to and from an account wallet;
@@ -32,13 +29,26 @@ User - Name, money, account type
 Item table - Name, item_id, cost
 
 
-### how to run the application
+## How to run the backend
 
-### any relevant information for a new team to pick up the project
+1. cd into the ```project1-backend``` folder
+2. ```sh compileAndRunBackend.sh``` should cause maven to download dependenices, compile Spring into a jar, and run it
 
-nginx gateway can be useful for local development and on the server
+## How to run the frontend
+1. cd into ```project1-frontend``` folder
+2. ```npm i``` to install dependenices based on package.json
+3. ```npm run start``` to execute start script within package.json for developing on local
 
-# Using nginx gateway to serve frontend files and proxy requests to running backend jars
+## How to compile the backend for placing on a server (Pending)
+
+1. Will use a shell script to compile React project in a way that prepends "/project1" onto all urls in the src files so we can reference it from the browser at "our-server.com/project1", instead of just at "our-server.com/"
+
+## How to compile the frontend for placing on a server (Pending)
+
+1. Should be able to use final jar file in target folder
+
+
+## Using nginx gateway to serve frontend files and proxy requests to running backend jars
 
 WHY?
 1. So you can edit and serve frontend files even when your backend is not working.
@@ -66,13 +76,14 @@ location /project1/ {
 }
 ```
 5. Goto command line or gitbash and start nginx from your home folder ~
-start nginx
+```start nginx```
 
 6. In the browser, on port 80, goto localhost/project1/index.html
 
 When changes are made to nginx.conf, reload the config using:
-nginx -s reload
+```nginx -s reload```
 
-If you see this error, start nginx
+If you see this error, ```start nginx```
+
 nginx: [error] OpenEvent("Global\ngx_reload_9456") failed (2: The system cannot find the file specified)
 
