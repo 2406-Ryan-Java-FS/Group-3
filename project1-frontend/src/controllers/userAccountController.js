@@ -6,7 +6,7 @@
 
     Attempting to make the app testable.
     React side will go through menus/pages/modals and 
-    make things look pretty,  but I would like it to be 
+    make things look pretty, but I would like it to be 
     as dumb as possible so we aren't tangled in state management hell.
 */
 export default class userAccountController
