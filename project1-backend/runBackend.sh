@@ -10,4 +10,4 @@
 #
 
 echo "Shell script: Running the jar"
-java -jar target/project1-0.0.1-SNAPSHOT.jar --spring.profiles.active=rsc
+java -jar target/project1-0.0.1-SNAPSHOT.jar --spring.profiles.active=h2

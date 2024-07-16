@@ -2,6 +2,8 @@ package com.revature.model;
 
 import java.sql.Date;
 //import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 
@@ -25,6 +27,17 @@ public class User
 
     private int money; //amount of money user has
 
+    public User userWithoutSensitiveInfo()
+    {
+        this.setPassword(null);
+        this.setSecretInformation(null);
+        return this;
+    }
+
+    public User userWithoutPassord(){
+        this.setPassword(null);
+        return this;
+    }
 
     public String getSecretInformation() {
         return secretInformation;
