@@ -1,7 +1,13 @@
-export default function Login() {
-    console.log("Login");
-
-    return(<>
-    <h1>Login</h1>
-    </>)
+export default function Login() 
+{
+return(<>
+    <center>
+    <h1>Welcome</h1>
+        <table>
+            <tr><td>Username:</td><td><input type="textbox"/></td></tr>
+            <tr><td>Password:</td><td><input type="textbox"/></td></tr>
+            <tr><td></td><td><button>Login</button></td></tr>
+        </table>
+    </center>
+</>)
 }
