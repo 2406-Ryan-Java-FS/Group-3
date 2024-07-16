@@ -1,3 +1,4 @@
 .idea
 project1-frontend/dist/*
-!project1-frontend/dist/qunit/
+!project1-frontend/dist/qunit/Dst
+.DS_Store
