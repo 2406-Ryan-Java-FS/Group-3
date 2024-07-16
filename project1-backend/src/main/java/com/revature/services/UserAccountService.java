@@ -58,8 +58,8 @@ public class UserAccountService {
         cal.add(Calendar.DAY_OF_YEAR,10);
         loggedInUser.setTokenExpiresOn(new Date(cal.getTimeInMillis()));
 
-        loggedInUser.setTokenId(        Double.toString(Math.random()*Long.MAX_VALUE));
-        loggedInUser.setTokenPassword(  Double.toString(Math.random()*Long.MAX_VALUE));
+        loggedInUser.setTokenId(        Help.randomString());
+        loggedInUser.setTokenPassword(  Help.randomString());
 
         userRepo.save(loggedInUser);
 
