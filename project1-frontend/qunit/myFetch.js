@@ -2,7 +2,7 @@
 /**
     Fetch method customized for hitting our endpoints
 */
-async function myFetch(method,endpoint,returnJsonBody,additionalHeaders,postData)
+export default async function myFetch(method,endpoint,returnJsonBody,additionalHeaders,postData)
 {
     const response=await fetch(endpoint,
     {

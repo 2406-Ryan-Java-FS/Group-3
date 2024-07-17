@@ -9,18 +9,51 @@
     make things look pretty, but I would like it to be 
     as dumb as possible so we aren't tangled in state management hell.
 */
+
 export default class userAccountController
 {
-    loggedInUser=null
-    
-    static register(username,password)
+    static loggedInUser=null
+    static newUserCreated=null
+
+    //constructor(){this.uselessConstructor=true}
+
+    static async register(username,password,secretInformation="")
     {
-        console.log(`register ${username} ${password}`)
+        console.log(`userAccountController register() ${username} ${password} ${secretInformation}`)
+
+        const response=await fetch(`/project1-back/users/register`,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                "name":username,
+                "password":password,
+                "secretInformation":secretInformation
+            })
+        })
+
+        if(response.status!=200)throw new Error(`response status not 200. response=${response}`)
+
+        userAccountController.newUserCreated=await response.json()
+        console.log(`userAccountController.newUserCreated=`,userAccountController.newUserCreated)
     }
 
-    static login(username,password)
+    static async login(username,password)
     {
-        console.log(`login ${username} ${password}`)
+        console.log(`userAccountController login() ${username} ${password}`)
+
+        const response=await fetch(`/project1-back/users/login`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "username":username,
+                "password":password
+            }
+        })
+
+        if(response.status!=200)throw new Error(`response status not 200. response=${response}`)
+
+        userAccountController.loggedInUser=await response.json()
+        console.log(`userAccountController.loggedInUser=`,userAccountController.loggedInUser)
     }
 
     static logout()

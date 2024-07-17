@@ -1,5 +1,9 @@
 
 
+import uac from "../src/controllers/userAccountController.js"
+import myFetch from "./myFetch.js"
+//import QUnit from "./index.html"
+
 QUnit.test("testRegistration",async function(assert)
 {
     /*
@@ -19,26 +23,34 @@ QUnit.test("testRegistration",async function(assert)
         secretInformation:"This is only accessible to this user"
     }
 
-    const newUserCreated=await myFetch(`POST`,`/project1-back/users/register`,true,null,userToCreate)
-    assert.true(newUserCreated.userId>0,"new user id was something")
-    assert.equal(newUserCreated.name,userToCreate.name, "name matches")
-    assert.equal(newUserCreated.password,null,          "responded password is gone. good.")
-    assert.equal(newUserCreated.secretInformation,null, "secretInformation was not revealed")
+    //const newUserCreated=await myFetch(`POST`,`/project1-back/users/register`,true,null,userToCreate)
+    // assert.true(newUserCreated.userId>0,"new user id was something")
+    // assert.equal(newUserCreated.name,userToCreate.name, "name matches")
+    // assert.equal(newUserCreated.password,null,          "responded password is gone. good.")
+    // assert.equal(newUserCreated.secretInformation,null, "secretInformation was not revealed")
+
+    await uac.register(userToCreate.name,userToCreate.password,userToCreate.secretInformation)
+    assert.true(uac.newUserCreated.userId>0,"new user id was something")
+    assert.equal(uac.newUserCreated.name,userToCreate.name, "name matches")
+    assert.equal(uac.newUserCreated.password,null,          "responded password is gone. good.")
+    assert.equal(uac.newUserCreated.secretInformation,null, "secretInformation was not revealed")
+    
 
     /*
-        Login as that new user
+        Login successfully as that new user
     */
-    const loggedInUser=await myFetch(`POST`,`/project1-back/users/login`,true,
-           {username:`qunitNonAdminUser`,password:`pass12345`},null)
-    assert.equal(loggedInUser.name,`qunitNonAdminUser`, "name matches")
-    assert.equal(loggedInUser.password,null,            "responded password is gone. good.")
-    assert.equal(loggedInUser.secretInformation,null,   "secretInformation was not revealed")
+    // const loggedInUser=await myFetch(`POST`,`/project1-back/users/login`,true,
+    //        {username:`qunitNonAdminUser`,password:`pass12345`},null)
+    await uac.login(`qunitNonAdminUser`,`pass12345`)
+    assert.equal(uac.loggedInUser.name,`qunitNonAdminUser`, "name matches")
+    assert.equal(uac.loggedInUser.password,null,            "responded password is gone. good.")
+    assert.equal(uac.loggedInUser.secretInformation,null,   "secretInformation was not revealed")
 
     /*
         Access information only that user should have
     */
     let body=await myFetch(`GET`,`/project1-back/users/my-private-info`,true,
-        {tokenId:loggedInUser.tokenId,tokenPassword:loggedInUser.tokenPassword},null)
+        {tokenId:uac.loggedInUser.tokenId,tokenPassword:uac.loggedInUser.tokenPassword},null)
     assert.equal(body.secretInformation,"This is only accessible to this user", "secret information matches")
 
     /*
@@ -57,6 +69,6 @@ QUnit.test("testRegistration",async function(assert)
         Successfully logout the logged in user
    */
     let bodyLogout=await myFetch(`POST`,`/project1-back/users/logout`,true,
-        {tokenId:loggedInUser.tokenId,tokenPassword:loggedInUser.tokenPassword},null)
+        {tokenId:uac.loggedInUser.tokenId,tokenPassword:uac.loggedInUser.tokenPassword},null)
     assert.equal(bodyLogout.message,"You have been logged out","logout worked great")
 })
