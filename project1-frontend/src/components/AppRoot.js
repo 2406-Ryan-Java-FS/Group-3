@@ -20,13 +20,15 @@ return(<>
     <BrowserRouter>
     {/* Links and Routes must be within BrowserRouter to avoid Errors*/}
     <nav>
-    <Link to="/">Login</Link> ~ 
     <Link to="/register"> Register</Link> ~ 
     <Link to="/cart"> Cart</Link> ~ 
     <Link to="/checkout"> Checkout</Link> ~ 
     <Link to="/product"> Product</Link> ~ 
     <Link to="/product-list"> Product List</Link><br/>
-    Logged in as: {uac.loggedInUser==null?`no one`:uac.loggedInUser.name}
+    {uac.loggedInUser==null?
+        <>Not logged in <Link to="/">Login</Link></>:
+        <>Logged in: {uac.loggedInUser.name} <Link>Logout</Link></>
+    }
     </nav>
     <Routes>
       <Route path='' element={<Login/>}/>
