@@ -31,7 +31,7 @@ export default class userAccountController
             })
         })
 
-        if(response.status!=200)throw new Error(`response status not 200. response=${response}`)
+        if(response.status!=200)throw new Error(`response status not 200. response=`+JSON.stringify(response))
 
         userAccountController.newUserCreated=await response.json()
         console.log(`userAccountController.newUserCreated=`,userAccountController.newUserCreated)
@@ -50,7 +50,7 @@ export default class userAccountController
             }
         })
 
-        if(response.status!=200)throw new Error(`response status not 200. response=${response}`)
+        if(response.status!=200)throw new Error(`response status not 200. response=`+JSON.stringify(response))
 
         userAccountController.loggedInUser=await response.json()
         console.log(`userAccountController.loggedInUser=`,userAccountController.loggedInUser)
