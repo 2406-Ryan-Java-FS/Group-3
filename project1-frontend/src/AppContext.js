@@ -6,23 +6,22 @@ export default function AppProvider({ children }) {
 
     //Here is where you can setup and create 'state' or any data
     //you want your Components to have access to.
-    const [budget, setBudget] = useState(1000);
+    const [quantity, setQuantity] = useState(0);
+    const [pItems, setPItems] = useState([]);
 
-    const [items, setItems] = useState(["Apples", "Oranges", "Bananas"]);
-
-    function updateBudget(newBudget) {
-        setBudget(newBudget);
+    function updateQuantity(newQuantity) {
+        setQuantity(newQuantity);
     }
 
-    function addItem(newItem) {
-        setItems([...items, newItem]);
+    function addPItem (newPItem) {
+        setPItems(newPItem);
     }
 
     const data = {
-        budget: budget,
-        updateBudget: updateBudget,
-        items: items,
-        addItem: addItem
+        quantity: quantity,
+        updateQuantity: updateQuantity,
+        pItems : pItems,
+        addPItem : addPItem        
     }
 
     return (

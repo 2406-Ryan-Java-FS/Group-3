@@ -1,7 +1,12 @@
-export default function Navbar() {
-    console.log("Navbar");
+import { Link } from "react-router-dom";
 
-    return(<>
-        <h1>Navbar</h1>
-        </>)
+
+export default function NavBar() {
+
+    return (<>
+        <nav id="navbar">
+            <Link to="/">Home</Link>
+            <Link to="/products">Products</Link>
+        </nav>
+    </>)
 }

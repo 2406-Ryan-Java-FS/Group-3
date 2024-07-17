@@ -13,19 +13,19 @@ function App() {
 
   return (<>
     
-    
+    <Navbar />
     <HomeComponent />
     <Cart />
     <Checkout />
     <Login />
-    <Navbar />
-    <Product />
-    <ProductList />
     <Register /> 
-    {/* <Routes>
+    <Routes>
       <Route path='' element={<HomeComponent />} />
+      <Route path='/products' element={<>
+        <Product />
+        <ProductList /> </>} />
       
-    </Routes> */}
+    </Routes>
   </>)
 
 }
