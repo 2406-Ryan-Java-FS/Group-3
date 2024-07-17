@@ -15,12 +15,10 @@ export default class userAccountController
     static loggedInUser=null
     static newUserCreated=null
 
-    //constructor(){this.uselessConstructor=true}
 
-    static async register(username,password,secretInformation="")
+    static async register(username,password,secretInformation="default secret info")
     {
         console.log(`userAccountController register() ${username} ${password} ${secretInformation}`)
-
         const response=await fetch(`/project1-back/users/register`,{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -40,7 +38,6 @@ export default class userAccountController
     static async login(username,password)
     {
         console.log(`userAccountController login() ${username} ${password}`)
-
         const response=await fetch(`/project1-back/users/login`,{
             method:"POST",
             headers:{
@@ -56,13 +53,26 @@ export default class userAccountController
         console.log(`userAccountController.loggedInUser=`,userAccountController.loggedInUser)
     }
 
+    static async myPrivateInfo()
+    {
+        console.log(`userAccountController myPrivateInfo()`)
+        const response=await fetch(`/project1-back/users/my-private-info`,{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json",
+                tokenId:        userAccountController.loggedInUser.tokenId,
+                tokenPassword:  userAccountController.loggedInUser.tokenPassword
+            }
+        })
+
+        if(response.status!=200)throw new Error(`response status not 200. response=`+JSON.stringify(response))
+        userAccountController.loggedInUser.secretInformation=(await response.json()).secretInformation
+    }
+
     static logout()
     {
 
     }
 
-    static myPrivateInfo()
-    {
-
-    }
+    
 }

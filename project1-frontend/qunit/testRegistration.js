@@ -49,9 +49,10 @@ QUnit.test("testRegistration",async function(assert)
     /*
         Access information only that user should have
     */
-    let body=await myFetch(`GET`,`/project1-back/users/my-private-info`,true,
-        {tokenId:uac.loggedInUser.tokenId,tokenPassword:uac.loggedInUser.tokenPassword},null)
-    assert.equal(body.secretInformation,"This is only accessible to this user", "secret information matches")
+    // let body=await myFetch(`GET`,`/project1-back/users/my-private-info`,true,
+    //     {tokenId:uac.loggedInUser.tokenId,tokenPassword:uac.loggedInUser.tokenPassword},null)
+    await uac.myPrivateInfo()
+    assert.equal(uac.loggedInUser.secretInformation,"This is only accessible to this user", "secret information matches")
 
     /*
         Try to access the secret information without a tokenId or tokenPassword
