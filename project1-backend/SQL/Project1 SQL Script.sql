@@ -45,6 +45,7 @@ create table orders (
 	address_id int not null,
 	created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp,
+    total_amount float,
 	foreign key (user_id) references users(user_id),
 	foreign key (address_id) references addresses(address_id)
 );
@@ -131,18 +132,18 @@ VALUES
 
 
 -----INSERT INTO orders
-INSERT INTO orders (user_id, status, address_id,created_at, updated_at)
+INSERT INTO orders (user_id, status, address_id,created_at, updated_at, total_amount)
 VALUES
-(1, 'pending', 2, current_timestamp, current_timestamp),
-(2, 'shipped', 1, current_timestamp, current_timestamp),
-(3, 'delivered', 5, current_timestamp, current_timestamp),
-(4, 'pending', 2, current_timestamp, current_timestamp),
-(5, 'canceled', 4, current_timestamp, current_timestamp),
-(6, 'shipped', 2, current_timestamp, current_timestamp),
-(7, 'delivered', 1, current_timestamp, current_timestamp),
-(8, 'returned', 3, current_timestamp, current_timestamp),
-(9, 'pending', 2, current_timestamp, current_timestamp),
-(10, 'shipped', 2, current_timestamp, current_timestamp);
+(1, 'pending', 2, current_timestamp, current_timestamp, 0.0),
+(2, 'shipped', 1, current_timestamp, current_timestamp, 0.0),
+(3, 'delivered', 5, current_timestamp, current_timestamp, 0.0),
+(4, 'pending', 2, current_timestamp, current_timestamp, 0.0),
+(5, 'canceled', 4, current_timestamp, current_timestamp, 0.0),
+(6, 'shipped', 2, current_timestamp, current_timestamp, 0.0),
+(7, 'delivered', 1, current_timestamp, current_timestamp, 0.0),
+(8, 'returned', 3, current_timestamp, current_timestamp, 0.0),
+(9, 'pending', 2, current_timestamp, current_timestamp, 0.0),
+(10, 'shipped', 2, current_timestamp, current_timestamp, 0.0);
 
 
 
