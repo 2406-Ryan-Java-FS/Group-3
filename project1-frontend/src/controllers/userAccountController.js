@@ -15,7 +15,9 @@ export default class userAccountController
     static loggedInUser=null
     static newUserCreated=null
 
-
+    /**
+     * Registers a new user initialized with the given username and password
+     */
     static async register(username,password,secretInformation="default secret info")
     {
         console.log(`userAccountController register() ${username} ${password} ${secretInformation}`)
@@ -37,6 +39,9 @@ export default class userAccountController
         console.log(`userAccountController.newUserCreated=`,userAccountController.newUserCreated)
     }
 
+    /**
+     * Sets the logged in user if the username and password works
+     */
     static async login(username,password)
     {
         console.log(`userAccountController login() ${username} ${password}`)
@@ -57,9 +62,14 @@ export default class userAccountController
         console.log(`userAccountController.loggedInUser=`,userAccountController.loggedInUser)
     }
 
+    /**
+     * Fetches and stores the private information of the currently logged in user
+     */
     static async myPrivateInfo()
     {
         console.log(`userAccountController myPrivateInfo()`)
+        if(userAccountController.loggedInUser==null)return ""
+
         const response=await fetch(`/project1-back/users/my-private-info`,{
             method:"GET",
             headers:{
@@ -75,9 +85,14 @@ export default class userAccountController
         userAccountController.loggedInUser.secretInformation=body.secretInformation
     }
 
+    /**
+     * Logs out the currently logged in user
+     */
     static async logout()
     {
         console.log(`userAccountController logout()`)
+        if(userAccountController.loggedInUser==null)return
+
         const response=await fetch(`/project1-back/users/logout`,{
             method:"POST",
             headers:{
@@ -91,6 +106,8 @@ export default class userAccountController
         if(response.status!=200)
             throw new Error(`response status ${response.status} `+JSON.stringify(body.errorMessage))
         
+        userAccountController.loggedInUser=null
+
         return body.message
     }
 

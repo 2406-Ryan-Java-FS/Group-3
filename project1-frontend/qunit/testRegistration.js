@@ -62,11 +62,25 @@ QUnit.test("testRegistration",async function(assert)
     let logoutMessage=await uac.logout()
     assert.equal(logoutMessage,"You have been logged out","logout worked great")
 
+    
+    /*
+        Check that the logged in user was set to null after logging out
+    */
+    let nothing=await uac.myPrivateInfo()
+    assert.equal(nothing,"","Nothing happended when we get private info, we're already logged out.")
+
+
+
     /*
         Try to access the secret information without a tokenId or tokenPassword
         1. shows that others are denied access
         2. logged out user is also denied access
     */
+    uac.loggedInUser={
+        tokenId:"badGuyGuessingTokenId",
+        tokenPassword:"badGuyGuessingTokenPassword",
+    }
+
     try{
         await uac.myPrivateInfo()
         assert.true(false,"Error should have happened. Can not reach this")
@@ -76,6 +90,8 @@ QUnit.test("testRegistration",async function(assert)
             `response status 401 "No Valid session for account within database"`,
             `401 error was thrown`)
     }
+
+
     // let response=await myFetch(`GET`,`/project1-back/users/my-private-info`,false,
     //     {tokenId:"guessingTheTokenId",tokenPassword:"guessingTheTokenPassword"},null)
     // assert.equal(response.status,401,"Expected 401 response status returned")

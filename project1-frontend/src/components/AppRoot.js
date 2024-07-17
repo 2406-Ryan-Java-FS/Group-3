@@ -29,7 +29,9 @@ return(<>
     <Link to="/product-list"> Product List</Link><br/>
     {uac.loggedInUser==null?
         <>Not logged in <Link to="/login">Login</Link></>:
-        <>Logged in: {uac.loggedInUser.name} <Link>Logout</Link></>
+        <>Logged in: {uac.loggedInUser.name}{" "}
+        <Link onClick={async()=>{await uac.logout();globalStateSetter()}}>Logout</Link>
+        </>
     }
     </nav>
     <Routes>

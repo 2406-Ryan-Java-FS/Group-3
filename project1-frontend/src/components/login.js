@@ -1,5 +1,5 @@
 import { useState } from "react"
-import userAccountController from "../controllers/userAccountController"
+import uac from "../controllers/userAccountController"
 import root from ".."
 import AppRoot, { globalStateSetter } from "./AppRoot"
 import { useNavigate } from "react-router"
@@ -17,11 +17,11 @@ return(
         <td></td>
     <td>
         <button onClick={async()=>{
-            await userAccountController.login(
+            await uac.login(
                 document.getElementById("idLoginUsername").value,
                 document.getElementById("idLoginPassword").value)
                 
-            await userAccountController.myPrivateInfo()
+            await uac.myPrivateInfo()
 
             navigate("/")//does not cause redraw
             globalStateSetter()//causes redraw
