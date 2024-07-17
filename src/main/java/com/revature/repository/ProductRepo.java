@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 import com.revature.models.Product;
 
 @Repository
-public interface ProductRepo extends JpaRepository<Product, Integer> {}
+public interface ProductRepo extends JpaRepository<Product, Integer> {
+}

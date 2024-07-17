@@ -107,5 +107,11 @@ public class OrderController {
         Map<String, Double> totalDetails = orderService.calculateTotalCostIncludingTaxesAndShipping(orderId);
         return ResponseEntity.ok(totalDetails);
     }
+    
+    @PostMapping("/{userId}/checkout")
+    public ResponseEntity<Orders> checkout(@PathVariable Integer userId) {
+        Orders checkedOutOrder = orderService.checkout(userId);
+        return ResponseEntity.ok(checkedOutOrder);
+    }
 }
 

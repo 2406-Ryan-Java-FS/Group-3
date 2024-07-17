@@ -1,6 +1,5 @@
 package com.revature.models;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,10 +11,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "carts")
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
     private Integer cartId;
 
     @ManyToOne
@@ -26,9 +23,9 @@ public class Cart {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    
     public Integer getCartId() {
         return cartId;
     }
@@ -59,5 +56,9 @@ public class Cart {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+    
+    public Integer getProductId() {
+        return product.getId();
     }
 }

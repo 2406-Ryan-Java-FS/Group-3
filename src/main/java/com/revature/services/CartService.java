@@ -51,4 +51,8 @@ public class CartService {
     public List<Cart> getCartItems(Integer userId) {
         return cartRepository.findByUser_UserId(userId);
     }
+
+    public void clearCart(Integer userId) {
+        cartRepository.deleteById(userId);
+    }
 }

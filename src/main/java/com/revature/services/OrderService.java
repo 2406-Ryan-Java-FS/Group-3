@@ -9,14 +9,36 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.models.Cart;
+import com.revature.models.OrderItem;
 import com.revature.models.Orders;
+import com.revature.models.Product;
+import com.revature.models.User;
+import com.revature.repository.CartRepository;
+import com.revature.repository.OrderItemRepository;
 import com.revature.repository.OrderRepository;
+import com.revature.repository.ProductRepo;
+import com.revature.repository.UserRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+	  @Autowired
+	    private OrderRepository orderRepository;
+
+	    @Autowired
+	    private UserRepository userRepository;
+
+	    @Autowired
+	    private CartRepository cartRepository;
+
+	    @Autowired
+	    private ProductRepo productRepository;
+
+	    @Autowired
+	    private OrderItemRepository orderItemRepository;
 
     public Optional<Orders> getOrderById(Integer id) {
         return orderRepository.findById(id);
@@ -103,5 +125,48 @@ public class OrderService {
                     totalDetails.put("Final Total", totalAmount + taxes + shipping);
                     return totalDetails;
                 }).orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
+    }
+   
+    public Orders checkout(Integer userId) {
+        List<Cart> cartItems = cartRepository.findByUser_UserId(userId);
+        if (cartItems.isEmpty()) {
+            throw new RuntimeException("Cart is empty");
+        }
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        Orders order = new Orders();
+        order.setUser(user);
+        order.setStatus("CHECKED_OUT");
+        order.setCreatedAt(new Date());
+        order.setUpdatedAt(new Date());
+        order.setTotalAmount(0.0);
+
+        double totalAmount = 0.0;
+        
+        // Save the order first to get the order ID
+        Orders savedOrder = orderRepository.save(order);
+
+        for (Cart cartItem : cartItems) {
+            Product product = productRepository.findById(cartItem.getProductId())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(savedOrder); // Use the saved order
+            orderItem.setProduct(product);
+            orderItem.setQuantity(cartItem.getQuantity());
+            orderItemRepository.save(orderItem);
+
+            totalAmount += product.getPrice() * cartItem.getQuantity();
+        }
+
+        // Update the total amount in the order
+        savedOrder.setTotalAmount(totalAmount);
+        orderRepository.save(savedOrder);
+
+        // Clear the user's cart using the custom query
+        cartRepository.deleteByUserId(userId);
+
+        return savedOrder;
     }
 }

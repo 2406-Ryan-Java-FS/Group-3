@@ -14,8 +14,8 @@ public class ProductService {
     @Autowired
     private ProductRepo productRepository;
 
-    public Product getProductById(Integer id) {
-        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+    public Optional<Product> getProductById(Integer productId) {
+        return productRepository.findById(productId);
     }
 
     public Product createProduct(Product product) {
@@ -33,4 +33,6 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
+    
+   
 }
