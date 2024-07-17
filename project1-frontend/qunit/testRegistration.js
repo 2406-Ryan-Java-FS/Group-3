@@ -55,21 +55,33 @@ QUnit.test("testRegistration",async function(assert)
     assert.equal(uac.loggedInUser.secretInformation,"This is only accessible to this user", "secret information matches")
 
     /*
-        Try to access the secret information without a tokenId or tokenPassword
-        to show that others are denied access like we expect
+            Successfully logout the logged in user
     */
+    // let bodyLogout=await myFetch(`POST`,`/project1-back/users/logout`,true,
+    //     {tokenId:uac.loggedInUser.tokenId,tokenPassword:uac.loggedInUser.tokenPassword},null)
+    let logoutMessage=await uac.logout()
+    assert.equal(logoutMessage,"You have been logged out","logout worked great")
 
-    let response=await myFetch(`GET`,`/project1-back/users/my-private-info`,false,
-        {tokenId:"guessingTheTokenId",tokenPassword:"guessingTheTokenPassword"},null)
-    assert.equal(response.status,401,"Expected 401 response status returned")
-    let body2=await response.json()
-    assert.equal(body2.errorMessage,"No Valid session for account within database","No valid session for this user")
-    assert.equal(body2.secretInformation,null,"secretInformation was not revealed")
+    /*
+        Try to access the secret information without a tokenId or tokenPassword
+        1. shows that others are denied access
+        2. logged out user is also denied access
+    */
+    try{
+        await uac.myPrivateInfo()
+        assert.true(false,"Error should have happened. Can not reach this")
+    }catch(ex){
+        //console.log(`ex.message=`,ex.message)
+        assert.equal(ex.message,
+            `response status 401 "No Valid session for account within database"`,
+            `401 error was thrown`)
+    }
+    // let response=await myFetch(`GET`,`/project1-back/users/my-private-info`,false,
+    //     {tokenId:"guessingTheTokenId",tokenPassword:"guessingTheTokenPassword"},null)
+    // assert.equal(response.status,401,"Expected 401 response status returned")
+    // let body2=await response.json()
+    // assert.equal(body2.errorMessage,"No Valid session for account within database","No valid session for this user")
+    // assert.equal(body2.secretInformation,null,"secretInformation was not revealed")
     
-   /*
-        Successfully logout the logged in user
-   */
-    let bodyLogout=await myFetch(`POST`,`/project1-back/users/logout`,true,
-        {tokenId:uac.loggedInUser.tokenId,tokenPassword:uac.loggedInUser.tokenPassword},null)
-    assert.equal(bodyLogout.message,"You have been logged out","logout worked great")
+    
 })

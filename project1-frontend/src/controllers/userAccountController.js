@@ -28,10 +28,12 @@ export default class userAccountController
                 "secretInformation":secretInformation
             })
         })
+        let body=await response.json()
 
-        if(response.status!=200)throw new Error(`response status not 200. response=`+JSON.stringify(response))
+        if(response.status!=200)
+            throw new Error(`response status ${response.status} `+JSON.stringify(body.errorMessage))
 
-        userAccountController.newUserCreated=await response.json()
+        userAccountController.newUserCreated=body
         console.log(`userAccountController.newUserCreated=`,userAccountController.newUserCreated)
     }
 
@@ -46,10 +48,12 @@ export default class userAccountController
                 "password":password
             }
         })
+        let body=await response.json()
 
-        if(response.status!=200)throw new Error(`response status not 200. response=`+JSON.stringify(response))
-
-        userAccountController.loggedInUser=await response.json()
+        if(response.status!=200)
+            throw new Error(`response status ${response.status} `+JSON.stringify(body.errorMessage))
+        
+        userAccountController.loggedInUser=body
         console.log(`userAccountController.loggedInUser=`,userAccountController.loggedInUser)
     }
 
@@ -64,14 +68,30 @@ export default class userAccountController
                 tokenPassword:  userAccountController.loggedInUser.tokenPassword
             }
         })
+        let body=await response.json()
 
-        if(response.status!=200)throw new Error(`response status not 200. response=`+JSON.stringify(response))
-        userAccountController.loggedInUser.secretInformation=(await response.json()).secretInformation
+        if(response.status!=200)
+            throw new Error(`response status ${response.status} `+JSON.stringify(body.errorMessage))
+        userAccountController.loggedInUser.secretInformation=body.secretInformation
     }
 
-    static logout()
+    static async logout()
     {
+        console.log(`userAccountController logout()`)
+        const response=await fetch(`/project1-back/users/logout`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                tokenId:        userAccountController.loggedInUser.tokenId,
+                tokenPassword:  userAccountController.loggedInUser.tokenPassword
+            }
+        })
+        let body=await response.json()
 
+        if(response.status!=200)
+            throw new Error(`response status ${response.status} `+JSON.stringify(body.errorMessage))
+        
+        return body.message
     }
 
     
