@@ -6,31 +6,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.revature.model.Order;
+import com.revature.repositories.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.models.Orders;
-import com.revature.repository.OrderRepository;
 
 @Service
 public class OrderService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderRepo orderRepository;
 
-    public Optional<Orders> getOrderById(Integer id) {
+    public Optional<Order> getOrderById(Integer id) {
         return orderRepository.findById(id);
     }
 
-   public List<Orders> getOrdersByUserId(Integer userId) {
+   public List<Order> getOrderByUserId(Integer userId) {
         return orderRepository.findByUser_UserId(userId);
     }
 
-    public Orders createOrder(Orders order) {
+    public Order createOrder(Order order) {
         return orderRepository.save(order);
     }
 
-    public Orders updateOrder(Integer id, Orders orderDetails) {
+    public Order updateOrder(Integer id, Order orderDetails) {
         return orderRepository.findById(id)
                 .map(order -> {
                     order.setStatus(orderDetails.getStatus());
@@ -43,7 +43,7 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    public Orders updateOrderStatus(Integer id, String status) {
+    public Order updateOrderStatus(Integer id, String status) {
         return orderRepository.findById(id)
                 .map(order -> {
                     order.setStatus(status);
@@ -54,11 +54,11 @@ public class OrderService {
 
     public String getOrderStatus(Integer id) {
         return orderRepository.findById(id)
-                .map(Orders::getStatus)
+                .map(Order::getStatus)
                 .orElseThrow(() -> new RuntimeException("Order not found with id " + id));
     }
     
-    public Orders applyDiscount(Integer orderId, String discountCode) {
+    public Order applyDiscount(Integer orderId, String discountCode) {
         return orderRepository.findById(orderId)
                 .map(order -> {
                     
@@ -81,7 +81,7 @@ public class OrderService {
         return orderRepository.save(order);
     }*/
     
-    public Orders getOrderSummary(Integer orderId) {
+    public Order getOrderSummary(Integer orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
     }

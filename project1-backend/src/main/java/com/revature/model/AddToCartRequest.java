@@ -1,4 +1,4 @@
-package com.revature.models;
+package com.revature.model;
 
 public class AddToCartRequest {
     private Long userId;

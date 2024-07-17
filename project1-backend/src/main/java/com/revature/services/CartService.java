@@ -2,15 +2,15 @@ package com.revature.services;
 
 import java.util.List;
 
+import com.revature.model.Cart;
+import com.revature.model.Product;
+import com.revature.model.User;
+import com.revature.repositories.CartRepository;
+import com.revature.repositories.ProductRepo;
+import com.revature.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.models.Cart;
-import com.revature.models.Product;
-import com.revature.models.User;
-import com.revature.repository.CartRepository;
-import com.revature.repository.ProductRepo;
-import com.revature.repository.UserRepository;
 
 @Service
 public class CartService {
@@ -19,7 +19,7 @@ public class CartService {
     private CartRepository cartRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepository;
 
     @Autowired
     private ProductRepo productRepository;

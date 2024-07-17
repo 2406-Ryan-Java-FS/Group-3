@@ -43,11 +43,11 @@ create table orders (
 	user_id int not null,
 	status varchar(50) not null,
 	address_id int not null,
-	create_at timestamp default current_timestamp,
+	created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp,
 	foreign key (user_id) references users(user_id),
 	foreign key (address_id) references addresses(address_id)
 );
-
 
 
 -- Create the orders_item table
@@ -60,7 +60,15 @@ create table order_item (
 	foreign key (product_id) references products(id)
 );
 
-
+-- Create the carts table
+CREATE TABLE carts (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
 
 
 
@@ -123,18 +131,18 @@ VALUES
 
 
 -----INSERT INTO orders
-INSERT INTO orders (user_id, status, address_id)
+INSERT INTO orders (user_id, status, address_id,created_at, updated_at)
 VALUES
-(1, 'pending', 2),
-(2, 'shipped', 1),
-(3, 'delivered', 5),
-(4, 'pending', 2),
-(5, 'canceled', 4),
-(6, 'shipped', 2),
-(7, 'delivered', 1),
-(8, 'returned', 3),
-(9, 'pending', 2),
-(10, 'shipped', 2);
+(1, 'pending', 2, current_timestamp, current_timestamp),
+(2, 'shipped', 1, current_timestamp, current_timestamp),
+(3, 'delivered', 5, current_timestamp, current_timestamp),
+(4, 'pending', 2, current_timestamp, current_timestamp),
+(5, 'canceled', 4, current_timestamp, current_timestamp),
+(6, 'shipped', 2, current_timestamp, current_timestamp),
+(7, 'delivered', 1, current_timestamp, current_timestamp),
+(8, 'returned', 3, current_timestamp, current_timestamp),
+(9, 'pending', 2, current_timestamp, current_timestamp),
+(10, 'shipped', 2, current_timestamp, current_timestamp);
 
 
 
@@ -152,6 +160,18 @@ VALUES
 (7, 9, 2),
 (8, 10, 5);
 
+INSERT INTO carts (user_id, product_id, quantity) VALUES
+(1, 1, 2),  -- User 1, Product 1 (Laptop), Quantity 2
+(1, 2, 1),  -- User 1, Product 2 (Smartphone), Quantity 1
+(1, 3, 5),  -- User 1, Product 3 (Novel), Quantity 5
+(2, 2, 3),  -- User 2, Product 2 (Smartphone), Quantity 3
+(2, 4, 4),  -- User 2, Product 4 (T-Shirt), Quantity 4
+(2, 1, 1),  -- User 2, Product 1 (Laptop), Quantity 1
+(3, 3, 2),  -- User 3, Product 3 (Novel), Quantity 2
+(3, 4, 6),  -- User 3, Product 4 (T-Shirt), Quantity 6
+(3, 2, 7),  -- User 3, Product 2 (Smartphone), Quantity 7
+(3, 1, 3);  -- User 3, Product 1 (Laptop), Quantity 3
+
 
 -- Select statements
 select * from users;
@@ -160,7 +180,8 @@ select * from categories;
 select * from orders;
 select * from order_item;
 select * from addresses;
+select * from carts
 
 
 ---Drop Statements
-DROP TABLE IF EXISTS users, products, categories, addresses, orders,order_item;
+DROP TABLE IF EXISTS users, products, categories, addresses, orders,order_item, carts;

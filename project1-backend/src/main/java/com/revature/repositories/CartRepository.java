@@ -1,6 +1,6 @@
-package com.revature.repository;
+package com.revature.repositories;
 
-import com.revature.models.Cart;
+import com.revature.model.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.revature.models;
+package com.revature.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "carts")
+@Table(name = "carts", schema = "project1")
 public class Cart {
 
     @Id

@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="users",schema="project1")
+@Table(name="users")
 public class User
 {
     @Id
@@ -16,12 +16,12 @@ public class User
     private String name;
     private String password;
     private String role;
- 
+
 
     private Date tokenIssuedOn;
     private Date tokenExpiresOn;
-    private String tokenId;         
-    private String tokenPassword;   
+    private String tokenId;
+    private String tokenPassword;
 
     public User() {}
 
@@ -88,5 +88,5 @@ public class User
         this.tokenPassword = tokenPassword;
     }
 
-    
+
 }
