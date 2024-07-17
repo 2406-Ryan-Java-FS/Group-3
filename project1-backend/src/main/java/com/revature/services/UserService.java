@@ -21,4 +21,9 @@ public class UserService {
     public List<User> findAll(){
         return userRepo.findAll();
     }
+
+    public User getUserById(int id){
+        return userRepo.findById(id).orElseGet(User::new);
+    }
+
 }
