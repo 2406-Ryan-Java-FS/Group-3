@@ -1,5 +1,7 @@
 import { useState } from "react"
 import userAccountController from "../controllers/userAccountController"
+import root from ".."
+import AppRoot, { globalStateSetter } from "./AppRoot"
 
 export default function Login() 
 {
@@ -13,11 +15,12 @@ return(
     <tr>
         <td></td>
     <td>
-        <button onClick={()=>{
-            userAccountController.login(
+        <button onClick={async()=>{
+            await userAccountController.login(
                 document.getElementById("idLoginUsername").value,
                 document.getElementById("idLoginPassword").value)
             setx(x+1)
+            globalStateSetter()
         }}
         >Login</button>
         
