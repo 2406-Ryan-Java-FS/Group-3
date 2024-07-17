@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { AppContext } from '../AppContext';
+// import { AppContext } from '../AppContext';
 
 export default function ProductList() {
     // console.log("Product List");
     const [products, setProducts] = useState([]);
-    const {quantity, updateQuantity} = useContext(AppContext);
+    // const {quantity, updateQuantity} = useContext(AppContext);
     
     const productContainer = products.map(p =>
         <div key={p.id}>
@@ -19,10 +19,8 @@ export default function ProductList() {
     );
 
     // function increase() { updateQuantity(quantity + 1); }
-
     // function decrease () { updateQuantity(quantity - 1 ); }
-    
-      
+          
     async function getAllProducts() {
         console.log("Getting Products...")
 

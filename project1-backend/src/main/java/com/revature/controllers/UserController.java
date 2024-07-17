@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import com.revature.Project1Application;
 import com.revature.model.AnyResponse;
 import com.revature.model.User;
 import com.revature.services.UserAccountService;

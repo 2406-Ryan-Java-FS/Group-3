@@ -22,8 +22,8 @@ function App() {
     <Routes>
       <Route path='' element={<HomeComponent />} />
       <Route path='/products' element={<>
-        <Product />
-        <ProductList /> </>} />
+        <ProductList />
+        <Product /> </>} />
       
     </Routes>
   </>)
