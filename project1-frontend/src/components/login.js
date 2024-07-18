@@ -1,8 +1,8 @@
 import { useState } from "react"
 import uac from "../controllers/userAccountController"
 import root from ".."
-import AppRoot, { globalStateSetter } from "./AppRoot"
 import { useNavigate } from "react-router"
+import { globalStateSetter } from "../App"
 
 export default function Login() 
 {

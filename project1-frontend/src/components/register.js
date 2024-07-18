@@ -2,7 +2,7 @@
 import { useRef } from "react"
 import userAccountController from "../controllers/userAccountController"
 import { useNavigate } from "react-router"
-import { globalStateSetter } from "./AppRoot"
+import { globalStateSetter } from "../App"
 
 export default function Register() 
 {

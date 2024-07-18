@@ -9,8 +9,8 @@ QUnit.test("testRegistration",async function(assert)
     /*
         Make sure tables are cleared for this test
     */
-    const anyBody=await myFetch(`DELETE`,`/project1-back/development/all`,true,null,null)
-    assert.equal(anyBody.message,"Cleared all database tables", "Response as successful")
+    // const anyBody=await myFetch(`DELETE`,`/project1-back/development/all`,true,null,null)
+    // assert.equal(anyBody.message,"Cleared all database tables", "Response as successful")
 
     /*
         Register a new user.

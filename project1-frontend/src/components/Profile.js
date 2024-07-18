@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import uac from "../controllers/userAccountController";
-import { globalStateSetter } from "./AppRoot";
 
 
 export default function Profile()
