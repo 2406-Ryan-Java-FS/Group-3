@@ -6,8 +6,10 @@ create table users (
         name varchar(255),
         password varchar(255),
         role varchar(255),
+        secret_information varchar(255),
         token_id varchar(255),
         token_password varchar(255),
+        money int,
         primary key (user_id)
     );
 
@@ -27,15 +29,26 @@ create table products (
 	foreign key (category_id) references categories(id)
 );
 
+    -- Create the addresses table
+    create table addresses (
+    	address_id serial primary key,
+    	address varchar(250) not null,
+	    user_id int not null,
+	    foreign key (user_id) references users(user_id)
+    );
+
 -- Create the orders table
 create table orders (
 	id serial primary key,
 	user_id int not null,
 	status varchar(50) not null,
-	create_at timestamp default current_timestamp,
-	foreign key (user_id) references users(user_id)
-); 
-
+	address_id int not null,
+	created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp,
+    total_amount float,
+	foreign key (user_id) references users(user_id),
+	foreign key (address_id) references addresses(address_id)
+);
 
 
 -- Create the orders_item table
@@ -48,7 +61,15 @@ create table order_item (
 	foreign key (product_id) references products(id)
 );
 
-
+-- Create the carts table
+CREATE TABLE carts (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
 
 
 
@@ -56,23 +77,23 @@ create table order_item (
 
 
 -----INSERT INTO USERS
-INSERT INTO users (token_expires_on, token_issued_on, name, password, role, token_id, token_password)
-VALUES 
-('2024-12-31', '2024-01-01', 'ola', 'ola123password', 'admin', 'token123', 'tokenpass123'),
-('2024-12-31', '2024-01-02', 'Bob', 'bob456password', 'user', 'token124', 'tokenpass124'),
-('2024-12-31', '2024-01-03', 'jeet', 'jeet789password', 'user', 'token125', 'tokenpass125'),
-('2024-12-31', '2024-01-04', 'Diana', 'diana012password', 'user', 'token126', 'tokenpass126'),
-('2024-12-31', '2024-01-05', 'Eve', 'eve345password', 'admin', 'token127', 'tokenpass127'),
-('2024-12-31', '2024-01-06', 'Eric', 'eric678password', 'user', 'token128', 'tokenpass128'),
-('2024-12-31', '2024-01-07', 'Grace', 'grace901password', 'user', 'token129', 'tokenpass129'),
-('2024-12-31', '2024-01-08', 'Heidi', 'heidi234password', 'user', 'token130', 'tokenpass130'),
-('2024-12-31', '2024-01-09', 'Ivan', 'ivan567password', 'admin', 'token131', 'tokenpass131'),
-('2024-12-31', '2024-01-10', 'Judy', 'judy890password', 'user', 'token132', 'tokenpass132');
+INSERT INTO users (token_expires_on, token_issued_on, name, password, role, secret_information, token_id, token_password, money)
+VALUES
+('2024-12-31', '2024-01-01', 'ola', 'ola123password', 'admin', 'test', 'token123', 'tokenpass123', 10000),
+('2024-12-31', '2024-01-02', 'Bob', 'bob456password', 'user', 'test','token124', 'tokenpass124', 13),
+('2024-12-31', '2024-01-03', 'jeet', 'jeet789password', 'user', 'test','token125', 'tokenpass125', 166),
+('2024-12-31', '2024-01-04', 'Diana', 'diana012password', 'user', 'test','token126', 'tokenpass126', 389),
+('2024-12-31', '2024-01-05', 'Eve', 'eve345password', 'admin', 'test','token127', 'tokenpass127', 8098),
+('2024-12-31', '2024-01-06', 'Eric', 'eric678password', 'user', 'test','token128', 'tokenpass128', 2),
+('2024-12-31', '2024-01-07', 'Grace', 'grace901password', 'user', 'test','token129', 'tokenpass129', 3999),
+('2024-12-31', '2024-01-08', 'Heidi', 'heidi234password', 'user', 'test','token130', 'tokenpass130', 2000),
+('2024-12-31', '2024-01-09', 'Ivan', 'ivan567password', 'admin', 'test','token131', 'tokenpass131', 3000),
+('2024-12-31', '2024-01-10', 'Judy', 'judy890password', 'user', 'test','token132', 'tokenpass132', 4000);
 
 
 -----INSERT INTO categories
 INSERT INTO categories (name)
-VALUES 
+VALUES
 ('Electronics'),
 ('Books'),
 ('Clothing'),
@@ -99,22 +120,30 @@ VALUES
 ('Lipstick', 'Matte finish lipstick in various shades', 14.99, 9),
 ('Organic Apples', 'Fresh organic apples from local farms', 3.99, 10);
 
+-----INSERT INTO addresses
+INSERT INTO addresses (address, user_id)
+VALUES
+('1234 best way', 1),
+('1235 best st', 2),
+('1212 north way', 1),
+('1231 best way', 4),
+('12 east way', 1),
+('13 best way', 3);
+
 
 -----INSERT INTO orders
-INSERT INTO orders (user_id, status)
+INSERT INTO orders (user_id, status, address_id,created_at, updated_at, total_amount)
 VALUES
-(1, 'pending'),
-(2, 'shipped'),
-(3, 'delivered'),
-(4, 'pending'),
-(5, 'canceled'),
-(6, 'shipped'),
-(7, 'delivered'),
-(8, 'returned'),
-(9, 'pending'),
-(10, 'shipped');
-
-
+(1, 'pending', 2, current_timestamp, current_timestamp, 0.0),
+(2, 'shipped', 1, current_timestamp, current_timestamp, 0.0),
+(3, 'delivered', 5, current_timestamp, current_timestamp, 0.0),
+(4, 'pending', 2, current_timestamp, current_timestamp, 0.0),
+(5, 'canceled', 4, current_timestamp, current_timestamp, 0.0),
+(6, 'shipped', 2, current_timestamp, current_timestamp, 0.0),
+(7, 'delivered', 1, current_timestamp, current_timestamp, 0.0),
+(8, 'returned', 3, current_timestamp, current_timestamp, 0.0),
+(9, 'pending', 2, current_timestamp, current_timestamp, 0.0),
+(10, 'shipped', 2, current_timestamp, current_timestamp, 0.0);
 
 
 
@@ -132,6 +161,18 @@ VALUES
 (7, 9, 2),
 (8, 10, 5);
 
+INSERT INTO carts (user_id, product_id, quantity) VALUES
+(1, 1, 2),  -- User 1, Product 1 (Laptop), Quantity 2
+(1, 2, 1),  -- User 1, Product 2 (Smartphone), Quantity 1
+(1, 3, 5),  -- User 1, Product 3 (Novel), Quantity 5
+(2, 2, 3),  -- User 2, Product 2 (Smartphone), Quantity 3
+(2, 4, 4),  -- User 2, Product 4 (T-Shirt), Quantity 4
+(2, 1, 1),  -- User 2, Product 1 (Laptop), Quantity 1
+(3, 3, 2),  -- User 3, Product 3 (Novel), Quantity 2
+(3, 4, 6),  -- User 3, Product 4 (T-Shirt), Quantity 6
+(3, 2, 7),  -- User 3, Product 2 (Smartphone), Quantity 7
+(3, 1, 3);  -- User 3, Product 1 (Laptop), Quantity 3
+
 
 -- Select statements
 select * from users;
@@ -139,8 +180,9 @@ select * from products;
 select * from categories;
 select * from orders;
 select * from order_item;
+select * from addresses;
+select * from carts
+
 
 ---Drop Statements
-DROP TABLE IF EXISTS users,  products,categories, orders,order_item;
-
-
+DROP TABLE IF EXISTS users, products, categories, addresses, orders,order_item, carts;

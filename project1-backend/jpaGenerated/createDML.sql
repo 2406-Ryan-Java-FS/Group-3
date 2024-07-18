@@ -6,7 +6,39 @@
         name varchar(255),
         password varchar(255),
         role varchar(255),
+        secret_information varchar(255),
         token_id varchar(255),
         token_password varchar(255),
         primary key (user_id)
+    );
+
+    create table categories (
+        id bigint not null,
+        name varchar(255),
+        primary key (id)
+    );
+
+    create table order_item (
+        order_id integer not null,
+        product_id integer not null,
+        quantity integer not null,
+        id bigint not null,
+        primary key (id)
+    );
+
+    create table orders (
+        create_at date,
+        user_id integer not null,
+        id bigint not null,
+        status varchar(255),
+        primary key (id)
+    );
+
+    create table products (
+        category_id integer not null,
+        price float4 not null,
+        id bigint not null,
+        description varchar(255),
+        name varchar(255),
+        primary key (id)
     );
