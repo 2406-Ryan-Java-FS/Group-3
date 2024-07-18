@@ -7,19 +7,13 @@ import myFetch from "./myFetch.js"
 QUnit.test("testRegistration",async function(assert)
 {
     /*
-        Make sure tables are cleared for this test
-    */
-    // const anyBody=await myFetch(`DELETE`,`/project1-back/development/all`,true,null,null)
-    // assert.equal(anyBody.message,"Cleared all database tables", "Response as successful")
-
-    /*
         Register a new user.
         May need additional two factor steps for creating
         new accounts since anyone can do it right now
     */
     const userToCreate={
         name:"qunitNonAdminUser",
-        password:"pass12345",
+        password:"09j0dia00912hed890qw293irn0-af",
         secretInformation:"This is only accessible to this user"
     }
 
@@ -41,7 +35,7 @@ QUnit.test("testRegistration",async function(assert)
     */
     // const loggedInUser=await myFetch(`POST`,`/project1-back/users/login`,true,
     //        {username:`qunitNonAdminUser`,password:`pass12345`},null)
-    await uac.login(`qunitNonAdminUser`,`pass12345`)
+    await uac.login(`qunitNonAdminUser`,`09j0dia00912hed890qw293irn0-af`)
     assert.equal(uac.loggedInUser.name,`qunitNonAdminUser`, "name matches")
     assert.equal(uac.loggedInUser.password,null,            "responded password is gone. good.")
     assert.equal(uac.loggedInUser.secretInformation,null,   "secretInformation was not revealed")
@@ -99,5 +93,16 @@ QUnit.test("testRegistration",async function(assert)
     // assert.equal(body2.errorMessage,"No Valid session for account within database","No valid session for this user")
     // assert.equal(body2.secretInformation,null,"secretInformation was not revealed")
     
-    
+    /*
+        Remove the user we created during testing
+        We're using our own tokens so only this logged in user can delete their account
+    */
+    await uac.login(`qunitNonAdminUser`,`09j0dia00912hed890qw293irn0-af`)
+
+    const anyBody=await myFetch(`DELETE`,`/project1-back/development/user`,true,
+        {
+            tokenId:uac.loggedInUser.tokenId,
+            tokenPassword:uac.loggedInUser.tokenPassword
+        },null)
+    assert.equal(anyBody.message,"Deleted user qunitNonAdminUser", "Response as successful")
 })

@@ -14,4 +14,6 @@ public interface UserRepo extends JpaRepository<User,Integer> {
     public List<User> findByNameAndPassword(String name,String password);
 
     public List<User> findByTokenIdAndTokenPassword(String tokenId,String tokenPassword);
+
+    public void deleteByName(String name);
 }
