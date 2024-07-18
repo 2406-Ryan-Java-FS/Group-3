@@ -33,7 +33,7 @@ Item table - Name, item_id, cost
 Products
 1. GET http://localhost:8080/products 				working
 2. GET http://localhost:8080/products/{id} 			working
-3. http://localhost:8080/products/search			Need Help
+3. GET http://localhost:8080/products/search			working
 4. POST http://localhost:8080/products				working
 5. PUT http://localhost:8080/products/{id}			working
 6. DELETE http://localhost:8080/products/{id}			working
@@ -48,7 +48,7 @@ Orders
 7. DELETE http://localhost:8080/api/orders/{id}			working
 8. PUT http://localhost:8080/api/orders/{id}			semi-working	Can update status and address_id, not total_amount
 9. PATCH http://localhost:8080/api/orders/{id}/status		working
-10. POST http://localhost:8080/api/orders/{id}/applyDiscount	need help
+10. POST http://localhost:8080/api/orders/{id}/applyDiscount	working		returns json of order, cannot see change in totalAmount
 
 Order-Items
 1. GET http://localhost:8080/api/order-items/{id} 		working
@@ -56,6 +56,18 @@ Order-Items
 3. GET http://localhost:8080/api/order-items/order/{id}		working
 4. PUT http://localhost:8080/api/order-items/{id}		working		only updates quantity
 5. DELETE http://localhost:8080/api/order-items/{id}		working
+
+Users
+1. POST http://localhost:8080/users/login			working
+2. POST http://localhost:8080/users/register			working
+3. POST http://localhost:8080/users/logout			working		Log Out message appears even when logged out
+4. GET http://localhost:8080/users/my-secret-info		semi-working	returned empty list
+
+Carts
+1. GET http://localhost:8080/api/cart/items?userId={userId}	working
+2. DELETE http://localhost:8080/api/cart/remove/{productID}	working		removes all of an item from cart
+3. PUT http://localhost:8080/api/cart/update/{productId}	working		use to change quantity
+4. POST http://localhost:8080/api/cart/add			Need Help	
 
 Addresses
 1. GET http://localhost:8080/address				working
