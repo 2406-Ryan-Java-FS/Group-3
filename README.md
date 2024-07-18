@@ -67,10 +67,19 @@ Carts
 1. GET http://localhost:8080/api/cart/items?userId={userId}	working
 2. DELETE http://localhost:8080/api/cart/remove/{productID}	working		removes all of an item from cart
 3. PUT http://localhost:8080/api/cart/update/{productId}	working		use to change quantity
-4. POST http://localhost:8080/api/cart/add			Need Help	
+4. POST http://localhost:8080/api/cart/add			Need Help
+   
+Categories
+1. GET http://localhost:8080/categories				working
+2. POST http://localhost:8080/categories			working		if id in json object it will overwrite like a put request
+3. PUT http://localhost:8080/categories/{id}			working
+4. DELETE http://localhost:8080/categories/{id}			working
 
 Addresses
 1. GET http://localhost:8080/address				working
+2. GET http://localhost:8080/address/{userId}			working
+3. POST http://localhost:8080/address				working
+4. DELETE http://localhost:8080/address/{addressId}		working
 
    
 ## How to run the backend
