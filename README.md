@@ -77,6 +77,9 @@ Categories
 
 Addresses
 1. GET http://localhost:8080/address				working
+2. GET http://localhost:8080/address/{userId}			working
+3. POST http://localhost:8080/address				working
+4. DELETE http://localhost:8080/address/{addressId}		working
 
    
 ## How to run the backend
