@@ -10,6 +10,7 @@ export default function AppProvider({ children }) {
     const [pItems, setPItems] = useState([]);
     const [pDesc, setPDesc] = useState([]);
     const [pPrice, setPPrice] = useState([]);
+    const [pCategoryId, setPCategoryId] = useState([]);
 
     // function updateQuantity(newQuantity) {
     //     setQuantity(newQuantity);
@@ -27,6 +28,10 @@ export default function AppProvider({ children }) {
         setPPrice(newPPrice);
     }
 
+    function addPCategoryID (newPCategoryId) {
+        setPCategoryId(newPCategoryId);
+    }
+
     const data = {
         // quantity: quantity,
         // updateQuantity: updateQuantity,
@@ -35,7 +40,9 @@ export default function AppProvider({ children }) {
         pDesc : pDesc,
         addPDesc : addPDesc,
         pPrice : pPrice,
-        addPPrice : addPPrice        
+        addPPrice : addPPrice,
+        pCategoryId : pCategoryId,
+        addPCategoryID : addPCategoryID        
     }
 
     return (

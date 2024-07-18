@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 // import { AppContext } from '../AppContext';
 
 export default function ProductList() {

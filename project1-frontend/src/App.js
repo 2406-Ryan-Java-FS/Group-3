@@ -8,22 +8,26 @@ import Navbar from './components/navbar';
 import Product from './components/product';
 import ProductList from './components/productlist';
 import Register from './components/register';
+import Category from './components/category';
+import AddCategory from './components/addCategory';
 
 function App() {
 
   return (<>
     
-    <Navbar />
-    <HomeComponent />
-    <Cart />
-    <Checkout />
-    <Login />
-    <Register /> 
+    <Navbar /> 
     <Routes>
       <Route path='' element={<HomeComponent />} />
       <Route path='/products' element={<>
         <ProductList />
         <Product /> </>} />
+      <Route path='/categories' element={<>
+        <Category />
+        <AddCategory /> </>} />
+      <Route path='/cart' element={<Cart />} />
+      <Route path='/checkout' element={<Checkout />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Register />} />
       
     </Routes>
   </>)
