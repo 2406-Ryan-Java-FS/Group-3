@@ -33,7 +33,7 @@ Item table - Name, item_id, cost
 Products
 1. GET http://localhost:8080/products 				working
 2. GET http://localhost:8080/products/{id} 			working
-3. http://localhost:8080/products/search			Not Working
+3. http://localhost:8080/products/search			Need Help
 4. POST http://localhost:8080/products				working
 5. PUT http://localhost:8080/products/{id}			working
 6. DELETE http://localhost:8080/products/{id}			working
@@ -43,11 +43,22 @@ Orders
 2. GET http://localhost:8080/api/orders/user/{id}		working
 3. GET http://localhost:8080/api/orders/{id}/status		working
 4. GET http://localhost:8080/api/orders/order/{id}/summary	working		Same information as orders/user/{id}
-5. GET http://localhost:8080/api/orders/{id}/calculateTotal	working
-6. POST http://localhost:8080/api/orders/			Not Working	Fix address model
-7. 
+5. GET http://localhost:8080/api/orders/{id}/calculateTotal	working		Calculate is assuming order.totalAmount is already correct total price
+6. POST http://localhost:8080/api/orders/			Working
+7. DELETE http://localhost:8080/api/orders/{id}			working
+8. PUT http://localhost:8080/api/orders/{id}			semi-working	Can update status and address_id, not total_amount
+9. PATCH http://localhost:8080/api/orders/{id}/status		working
+10. POST http://localhost:8080/api/orders/{id}/applyDiscount	need help
 
-9. GET http://localhost:8080/api/order-items/{id} 		working
+Order-Items
+1. GET http://localhost:8080/api/order-items/{id} 		working
+2. POST http://localhost:8080/api/order-items			working
+3. GET http://localhost:8080/api/order-items/order/{id}		working
+4. PUT http://localhost:8080/api/order-items/{id}		working		only updates quantity
+5. DELETE http://localhost:8080/api/order-items/{id}		working
+
+Addresses
+1. GET http://localhost:8080/address				working
 
    
 ## How to run the backend
