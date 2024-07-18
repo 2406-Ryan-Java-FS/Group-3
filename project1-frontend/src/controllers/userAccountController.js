@@ -57,7 +57,7 @@ export default class userAccountController
 
         if(response.status!=200)
             throw new Error(`response status ${response.status} `+JSON.stringify(body.errorMessage))
-        
+
         userAccountController.loggedInUser=body
         console.log(`userAccountController.loggedInUser=`,userAccountController.loggedInUser)
     }
@@ -103,11 +103,12 @@ export default class userAccountController
         })
         let body=await response.json()
 
+        //error or not, frontend is logging out
+        userAccountController.loggedInUser=null
+
         if(response.status!=200)
             throw new Error(`response status ${response.status} `+JSON.stringify(body.errorMessage))
         
-        userAccountController.loggedInUser=null
-
         return body.message
     }
 

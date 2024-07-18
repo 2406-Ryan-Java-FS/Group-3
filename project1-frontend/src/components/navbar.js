@@ -17,7 +17,7 @@ export default function NavBar() {
         {uac.loggedInUser==null?
         <>Not logged in <Link to="/login">Login</Link></>:
         <>Logged in: {uac.loggedInUser.name}{" "}
-        <Link onClick={async()=>{await uac.logout();globalStateSetter()}}>Logout</Link>
+        <Link onClick={async()=>{uac.logout();globalStateSetter()}}>Logout</Link>
         </>}
         
     </>)
