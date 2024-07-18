@@ -28,7 +28,28 @@ Review- item_id, review_id, text
 User - Name, money, account type
 Item table - Name, item_id, cost
 
+## Working backend
 
+Products
+1. GET http://localhost:8080/products 				working
+2. GET http://localhost:8080/products/{id} 			working
+3. http://localhost:8080/products/search			Not Working
+4. POST http://localhost:8080/products				working
+5. PUT http://localhost:8080/products/{id}			working
+6. DELETE http://localhost:8080/products/{id}			working
+
+Orders
+1. GET http://localhost:8080/api/orders/{id}/calculateTotal 	working
+2. GET http://localhost:8080/api/orders/user/{id}		working
+3. GET http://localhost:8080/api/orders/{id}/status		working
+4. GET http://localhost:8080/api/orders/order/{id}/summary	working		Same information as orders/user/{id}
+5. GET http://localhost:8080/api/orders/{id}/calculateTotal	working
+6. POST http://localhost:8080/api/orders/			Not Working	Fix address model
+7. 
+
+9. GET http://localhost:8080/api/order-items/{id} 		working
+
+   
 ## How to run the backend
 
 1. cd into the ```project1-backend``` folder
