@@ -34,6 +34,7 @@ public class OrderService {
         return orderRepository.findById(id)
                 .map(order -> {
                     order.setStatus(orderDetails.getStatus());
+                    order.setAddressId(orderDetails.getAddressId());
                     order.setUpdatedAt(new Date());
                     return orderRepository.save(order);
                 }).orElseThrow(() -> new RuntimeException("Order not found with id " + id));

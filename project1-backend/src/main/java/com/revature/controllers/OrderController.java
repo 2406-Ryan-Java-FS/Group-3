@@ -39,12 +39,12 @@ public class OrderController {
         return ResponseEntity.ok(orderService.updateOrder(orderId, orderDetails));
     }
 
-   /* @DeleteMapping("/{orderId}")
+   @DeleteMapping("/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Integer orderId) {
         orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
-*/
+
     @PatchMapping("/{orderId}/status")
     public ResponseEntity<Order> updateOrderStatus(@PathVariable Integer orderId, @RequestBody Map<String, String> request) {
         String status = request.get("status");
@@ -77,14 +77,6 @@ public class OrderController {
                     totalDetails.put("Final Total", totalAmount + taxes + shipping);
                     return totalDetails;
                 }).orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
-    }
-    
-
-
-    @GetMapping("/order/{orderId}/summary")
-    public ResponseEntity<Orders> getOrderSummary(@PathVariable Integer orderId) {
-        Orders orderSummary = orderService.getOrderSummary(orderId);
-        return ResponseEntity.ok(orderSummary);
     }*/
     
     @GetMapping("/order/{orderId}/summary")

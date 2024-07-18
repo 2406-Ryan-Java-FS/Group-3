@@ -27,24 +27,24 @@ public class UserController {
 //        return "<h1>project1 backend is running</h1>";
 //    }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public User register(@RequestBody User newUserToCreate) {
         return userAccountService.register(newUserToCreate);
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public User login(@RequestHeader("username") String username,
                       @RequestHeader("password") String password)
     {
         return userAccountService.login(username,password);
     }
 
-    @PostMapping("logout")
+    @PostMapping("/logout")
     public AnyResponse logout(@ModelAttribute("loggedInUser") User loggedInUser){
         return userAccountService.logout(loggedInUser);
     }
 
-    @GetMapping("my-private-info")
+    @GetMapping("/my-private-info")
     public AnyResponse myPrivateInfo(@ModelAttribute("loggedInUser") User loggedInUser){
         return userAccountService.myPrivateInfo(loggedInUser);
     }

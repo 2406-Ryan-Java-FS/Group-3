@@ -20,10 +20,11 @@ public class Order {
     private User user;
 
     private String status;
+    private int addressId;
     private Date createdAt;
     private Date updatedAt;
 
-    private Double totalAmount= 0.0;
+    private Double totalAmount;
 
 
 
@@ -49,6 +50,14 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
     public Date getCreatedAt() {
