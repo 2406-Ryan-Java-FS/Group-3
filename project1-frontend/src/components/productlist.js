@@ -1,26 +1,22 @@
 import { useState, useEffect } from "react";
-// import { AppContext } from '../AppContext';
 
 export default function ProductList() {
     // console.log("Product List");
     const [products, setProducts] = useState([]);
-    // const {quantity, updateQuantity} = useContext(AppContext);
     
     const productContainer = products.map(p =>
         <div key={p.id}>
             {p.name} <br />
             {p.description} <br />
             {p.price} <br />
-            {/* Qty: {quantity}
-            <button onClick={increase}>+</button>
-            <button onClick={decrease}>-</button> */}
-            <button>Add to Cart</button>
+            <button onClick={addToCart}>Add to Cart</button>
         </div>
     );
 
-    // function increase() { updateQuantity(quantity + 1); }
-    // function decrease () { updateQuantity(quantity - 1 ); }
-          
+    function addToCart() {
+        
+    }
+     
     async function getAllProducts() {
         console.log("Getting Products...")
 

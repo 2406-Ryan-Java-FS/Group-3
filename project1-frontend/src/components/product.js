@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import ProductList from './productlist';
 // import { AppContext } from '../AppContext';
 
 export default function Product() {
@@ -30,18 +31,18 @@ export default function Product() {
         console.log(pPriceInput.current.value);
         console.log(pCategoryIdInput.current.value);
 
-        // if (pItems.includes(pItemInput.current.value)) {
+        // if (ProductList.productList.includes(pItemInput.current.value)) {
         //     alert ("Item already on Product List!");
         // } else {
-        addProduct(pItemInput.current.value, 
-            pDescInput.current.value, 
-            pPriceInput.current.value,
-            pCategoryIdInput.current.value);
-        
-        // pItemInput.current.value = "";
-        // pDescInput.current.value = "";
-        // pPriceInput.current.value = "";
-        // pCategoryIdInput.current.value = "";    
+            addProduct(pItemInput.current.value, 
+                pDescInput.current.value, 
+                pPriceInput.current.value,
+                pCategoryIdInput.current.value);
+            
+        pItemInput.current.value = "";
+        pDescInput.current.value = "";
+        pPriceInput.current.value = "";
+        pCategoryIdInput.current.value = "";    
     }
 
     return(<>

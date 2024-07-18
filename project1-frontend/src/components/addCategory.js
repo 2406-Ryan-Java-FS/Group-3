@@ -1,4 +1,5 @@
 import { useRef } from "react";
+// import Category from "./category";
 
 export default function AddCategory() {
 
@@ -20,7 +21,10 @@ export default function AddCategory() {
 
     function createCatergory() {
         console.log(categoryName.current.value);
+        
         addCategory(categoryName.current.value);
+            
+        categoryName.current.value = "";
     }
 
     return(<>
