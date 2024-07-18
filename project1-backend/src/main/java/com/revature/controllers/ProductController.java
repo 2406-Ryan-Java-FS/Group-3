@@ -1,7 +1,13 @@
 package com.revature.controllers;
 
+import com.revature.ProductDTO;
+import com.revature.model.Category;
 import com.revature.model.Product;
+import com.revature.repositories.CategoryRepo;
 import com.revature.services.ProductService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +20,13 @@ import java.util.List;
 @CrossOrigin
 public class ProductController {
 
+    private static final Logger logger= LoggerFactory.getLogger(ProductController.class);
+
 //    @Autowired
     ProductService ps;
+
+    @Autowired
+    CategoryRepo categoryRepo;
 
     @Autowired
     public ProductController(ProductService ps) {
@@ -38,10 +49,21 @@ public class ProductController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Product> addProduct(@RequestBody Product p) {
-        p = ps.addProduct(p);
+    public ResponseEntity<Product> addProduct(@RequestBody ProductDTO productDTO) {
 
-        return new ResponseEntity<>(p, HttpStatus.OK);
+        Category existingCategory=categoryRepo.findById(Integer.parseInt(productDTO.getCategory()))
+            .orElseThrow();
+        logger.info("existingCategory="+existingCategory);
+
+        Product newProd=new Product();
+        newProd.setName(        productDTO.getName());
+        newProd.setDescription( productDTO.getDescription());
+        newProd.setPrice(       productDTO.getPrice());
+        newProd.setCategory(existingCategory);
+
+        Product saved = ps.addProduct(newProd);
+
+        return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

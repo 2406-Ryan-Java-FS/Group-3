@@ -31,6 +31,7 @@ export default function Product() {
         console.log(pPriceInput.current.value);
         console.log(pCategoryIdInput.current.value);
 
+        //wanted to check the category name before adding to avoid duplicates
         // if (ProductList.productList.includes(pItemInput.current.value)) {
         //     alert ("Item already on Product List!");
         // } else {
