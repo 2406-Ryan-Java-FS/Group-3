@@ -1,22 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import Cart from './components/cart';
-import Checkout from './components/checkout';
-import Login from './components/login';
-import Navbar from './components/navbar';
-import Product from './components/product';
-import ProductList from './components/productlist';
-import Register from './components/register';
+import App from './App';
+import AppProvider from './AppContext';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Cart />
-    <Checkout />
-    <Login />
-    <Navbar />
-    <Product />
-    <ProductList />
-    <Register />    
+    <BrowserRouter>
+      {/* Wraped the Provider around the application */}
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

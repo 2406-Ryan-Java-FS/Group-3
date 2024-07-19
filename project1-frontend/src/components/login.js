@@ -1,7 +1,35 @@
-export default function Login() {
-    console.log("Login");
+import { useState } from "react"
+import uac from "../controllers/userAccountController"
+import root from ".."
+import { useNavigate } from "react-router"
+import { globalStateSetter } from "../App"
 
-    return(<>
-    <h1>Login</h1>
-    </>)
+export default function Login() 
+{
+    let navigate=useNavigate()
+return(
+<center>
+<h1>Welcome</h1>
+<table>
+    <tr><td>Username:</td><td><input id="idLoginUsername" type="textbox"/></td></tr>
+    <tr><td>Password:</td><td><input id="idLoginPassword" type="password"/></td></tr>
+    <tr>
+        <td></td>
+    <td>
+        <button onClick={async()=>{
+            await uac.login(
+                document.getElementById("idLoginUsername").value,
+                document.getElementById("idLoginPassword").value)
+                
+            await uac.myPrivateInfo()
+
+            navigate("/")//does not cause redraw
+            globalStateSetter()//causes redraw
+        }}
+        >Login</button>
+        
+    </td>
+    </tr>
+</table>
+</center>)
 }
