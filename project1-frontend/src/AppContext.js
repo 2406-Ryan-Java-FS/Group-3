@@ -6,43 +6,16 @@ export default function AppProvider({ children }) {
 
     //Here is where you can setup and create 'state' or any data
     //you want your Components to have access to.
-    // const [quantity, setQuantity] = useState(0);
-    const [pItems, setPItems] = useState([]);
-    const [pDesc, setPDesc] = useState([]);
-    const [pPrice, setPPrice] = useState([]);
-    const [pCategoryId, setPCategoryId] = useState([]);
+    
+    const [cart, setCart] = useState([]);
 
-    // function updateQuantity(newQuantity) {
-    //     setQuantity(newQuantity);
-    // }
-
-    function addPItem (newPItem) {
-        setPItems(newPItem);
-    }
-
-    function addPDesc (newPDesc) {
-        setPDesc(newPDesc);
-    }
-
-    function addPPrice (newPPrice) {
-        setPPrice(newPPrice);
-    }
-
-    function addPCategoryID (newPCategoryId) {
-        setPCategoryId(newPCategoryId);
+    function addToCart(product) {
+        setCart([...cart,product]);
     }
 
     const data = {
-        // quantity: quantity,
-        // updateQuantity: updateQuantity,
-        pItems : pItems,
-        addPItem : addPItem,
-        pDesc : pDesc,
-        addPDesc : addPDesc,
-        pPrice : pPrice,
-        addPPrice : addPPrice,
-        pCategoryId : pCategoryId,
-        addPCategoryID : addPCategoryID        
+        cart:cart,
+        addToCart:addToCart
     }
 
     return (
