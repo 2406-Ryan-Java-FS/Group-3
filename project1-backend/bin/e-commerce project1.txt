@@ -1,0 +1,88 @@
+
+Project Overview
+Develop a full-featured e-commerce platform where users can browse products, add them to their cart, and make purchases. Admin users can manage product listings, view orders, and handle customer queries.
+
+Key Features
+1. User Authentication and Authorization
+
+2. User registration and login
+Role-based access control (Admin, Customer)
+Password encryption and security
+
+3. Product Management
+Admin panel for adding, updating, and deleting products
+
+4. Product categories and tags
+Product search and filtering options
+
+5. Shopping Cart and Checkout
+Add, remove, and update items in the cart
+
+
+6. Apply discount codes
+Calculate total cost including taxes and shipping
+Order summary and confirmation
+
+
+7. Order Management
+Order history for customers
+Order tracking and status updates
+Admin view for managing orders
+
+8. Customer Management
+User profile management
+
+9. Address book for multiple shipping addresses
+Wishlist functionality
+
+10. Sales reports and statistics for admins
+User activity tracking
+
+## Technology Stack
+Backend: Java 17, Spring Boot 3
+Database: PostgreSQL
+
+## Stretch
+Payment Gateway: Stripe or PayPal integration
+Notification for order
+Security: Spring Security for authentication and authorization
+Testing: JUnit, Mockito for unit and integration testing
+
+## Table
+1. User     
+Long id pk
+String username
+String password
+String role
+
+2. Product 
+int id pk
+String name
+String description
+Decimal price
+Category category 
+
+3. Category
+int id pk
+String name
+
+4. Order 
+Long id pk
+Long userId
+String status
+created_at TIMESTAMP
+
+5. OrderItem 
+Long id pk
+Order order
+Product product
+Integer quantity
+
+Allocation
+Name	User Stories
+Rene 	1,2
+Jeet 	3,4
+Ola	5,6,7
+Eric	8,9,10
+
+

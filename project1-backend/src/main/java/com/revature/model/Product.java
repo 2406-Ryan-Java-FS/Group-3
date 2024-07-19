@@ -1,5 +1,8 @@
 package com.revature.model;
 
+import com.revature.ProductDTO;
+import com.revature.model.Category;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,9 +18,32 @@ public class Product {
 
     private String name;
     private String description;
-    private BigDecimal price;
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
+    
+    
+   
+}  
+
+
