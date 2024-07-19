@@ -14,6 +14,8 @@ export default class userAccountController
 {
     static loggedInUser=null
     static newUserCreated=null
+    ///project1-back
+    static tempUrl="http://localhost:8080"
 
     /**
      * Registers a new user initialized with the given username and password
@@ -21,7 +23,7 @@ export default class userAccountController
     static async register(username,password,secretInformation="default secret info")
     {
         console.log(`userAccountController register() ${username} ${password} ${secretInformation}`)
-        const response=await fetch(`/project1-back/users/register`,{
+        const response=await fetch(`${userAccountController.tempUrl}/users/register`,{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify({
@@ -45,7 +47,7 @@ export default class userAccountController
     static async login(username,password)
     {
         console.log(`userAccountController login() ${username} ${password}`)
-        const response=await fetch(`/project1-back/users/login`,{
+        const response=await fetch(`${userAccountController.tempUrl}/users/login`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -70,7 +72,7 @@ export default class userAccountController
         console.log(`userAccountController myPrivateInfo()`)
         if(userAccountController.loggedInUser==null)return ""
 
-        const response=await fetch(`/project1-back/users/my-private-info`,{
+        const response=await fetch(`${userAccountController.tempUrl}/users/my-private-info`,{
             method:"GET",
             headers:{
                 "Content-Type":"application/json",
@@ -93,7 +95,7 @@ export default class userAccountController
         console.log(`userAccountController logout()`)
         if(userAccountController.loggedInUser==null)return
 
-        const response=await fetch(`/project1-back/users/logout`,{
+        const response=await fetch(`${userAccountController.tempUrl}/users/logout`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
