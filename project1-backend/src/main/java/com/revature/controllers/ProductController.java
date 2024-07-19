@@ -1,11 +1,10 @@
 package com.revature.controllers;
 
-import com.revature.ProductDTO;
+import com.revature.dto.ProductDTO;
 import com.revature.model.Category;
 import com.revature.model.Product;
 import com.revature.repositories.CategoryRepo;
 import com.revature.services.ProductService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
