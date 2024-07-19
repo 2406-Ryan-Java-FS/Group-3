@@ -1,8 +1,8 @@
 # Eccomerce Application:
 
 ## what technologies are required for the application
-API built with Java 17+ and Spring Boot 3+
-UI built with React with TypeScript/JavaScript
+API built with Java 17+ and Spring Boot 3+ <br>
+UI built with React with JavaScript, HTML, CSS
 
 ## Stories
 Users can Create new accounts; <br>
