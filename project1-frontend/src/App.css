@@ -1,0 +1,82 @@
+#navbar a {
+  display: inline;
+  margin: 5px;
+  background-color: rgb(230, 230, 230);
+  padding: 5px;
+  border: 1px solid black;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(26, 26, 26);
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgb(0, 0, 100);
+  cursor: pointer;
+}
+
+.grid-container div{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  height: auto;
+  width: auto;  
+  margin: 5px;
+  background-color: rgb(230, 230, 230);
+  padding: 5px;
+  border: 1px solid black;
+  color: rgb(26, 26, 26);
+  cursor: pointer;
+}
+
+.grid-item div{
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 15px;
+  text-align: center;  
+}
+
+input {
+  padding: 5px;
+}
+body{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: rgb(190, 159, 92);
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+nav{
+  background-color: rgb(157, 131, 75);
+  padding: 12px;
+  border-radius: 5px;
+}
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table{
+  background-color: rgb(157, 131, 75);
+  border-radius: 5px;
+  margin:5px;
+}
+
+td{
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+button{
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+button:hover{
+  background-color: rgb(25, 183, 4);
+  cursor: pointer;/*Got to have the little hand*/
+}
+
