@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../AppContext";
 
 export default function ProductList() {
     // console.log("Product List");
     const [products, setProducts] = useState([]);
+    const {addToCart} = useContext(AppContext)
     
     const productContainer = products.map(p =>
         <div key={p.id}>
             {p.name} <br />
             {p.description} <br />
             {p.price} <br />
-            <button onClick={addToCart}>Add to Cart</button>
+            <button onClick={handleAddToCart}>Add to Cart</button>
         </div>
     );
 
-    function addToCart() {
-        
+    function handleAddToCart() {
+        addToCart(products);
     }
      
     async function getAllProducts() {
