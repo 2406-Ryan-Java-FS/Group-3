@@ -8,7 +8,7 @@
   font-weight: bold;
   color: rgb(26, 26, 26);
   border-radius: 5px;
-  box-shadow: 2px 2px 2px rgb(0, 0, 100);
+  box-shadow: 2px 2px 2px rgb(67, 49, 1);
   cursor: pointer;
 }
 
@@ -20,9 +20,9 @@
   margin: 5px;
   background-color: rgb(230, 230, 230);
   padding: 5px;
-  border: 1px solid black;
+  border: 1px dotted black;
+  border-radius: 5px;
   color: rgb(26, 26, 26);
-  cursor: pointer;
 }
 
 .grid-item div{
@@ -43,6 +43,9 @@ nav{
   background-color: rgb(157, 131, 75);
   padding: 12px;
   border-radius: 5px;
+}
+p{
+  text-align: justify;
 }
 
 table{

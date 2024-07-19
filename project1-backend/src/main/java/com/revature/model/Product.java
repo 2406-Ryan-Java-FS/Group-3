@@ -1,6 +1,5 @@
 package com.revature.model;
 
-import com.revature.ProductDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
