@@ -20,8 +20,22 @@ public class AddressService {
     public List<Address> getAllAddresses(){
         return ar.findAll();
     }
-    public Address getAddressByID(int id){
-        return ar.getReferenceById(id);
+    public List<Address> getAddressByUserId(int id){
+        return ar.getAddressesByUserId(id);
+    }
+
+    public Address addAddress(Address a){
+        return ar.save(a);
+    }
+
+    public boolean deleteAddress(int id){
+        try {
+            ar.deleteById(id);
+            return true;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

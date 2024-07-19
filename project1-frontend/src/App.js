@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import HomeComponent from './components/home';
 import Cart from './components/cart';
 import Checkout from './components/checkout';
@@ -10,8 +10,15 @@ import ProductList from './components/productlist';
 import Register from './components/register';
 import Category from './components/category';
 import AddCategory from './components/addCategory';
+import { useState } from 'react';
+import uac from './controllers/userAccountController';
+
+export let globalStateSetter
 
 function App() {
+
+  let [x,setx]=useState(0)
+  globalStateSetter=()=>{setx(x+1)}
 
   return (<>
     
@@ -28,7 +35,6 @@ function App() {
       <Route path='/checkout' element={<Checkout />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
-      
     </Routes>
   </>)
 

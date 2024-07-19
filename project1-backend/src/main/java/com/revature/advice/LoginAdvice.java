@@ -18,7 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@Profile({"h2","rsc"})
+//@Profile({"h2","rsc"})
 @ControllerAdvice
 public class LoginAdvice {
 
@@ -35,17 +35,30 @@ public class LoginAdvice {
     public User checkForLogin(HttpServletRequest everyRequest) throws InterruptedException {
         logger.info("");
         logger.info("------"+everyRequest.getRequestURI()+"------");
+        logger.info("everyRequest.getRequestURI().contains(/users)="+everyRequest.getRequestURI().contains("/users"));
+
         //Thread.sleep(500);
-        if(everyRequest.getRequestURI().equals("/users/login"))     return null;//ignore this endpoint
-        if(everyRequest.getRequestURI().equals("/users/register"))  return null;//and this one
-        if(everyRequest.getRequestURI().contains("/development"))   return null;
+        if(everyRequest.getRequestURI().equals("/users/login"))         return null;//ignore this endpoint
+        logger.info("reached 2");
+
+        if(everyRequest.getRequestURI().equals("/users/register"))      return null;//and this one
+        logger.info("reached 3");
+
+        //only require token id and password for these endpoints for now so we can demo
+        if(!everyRequest.getRequestURI().contains("/development")
+        && !everyRequest.getRequestURI().contains("/users")) {
+            logger.info("Does not contain /users or /development . Skipping logged in user validation.");
+            return null;
+        }
+        logger.info("reached 5");
 
         if(StringUtils.isEmpty(everyRequest.getHeader("tokenId")))
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"session tokenId required");
-
+        logger.info("reached 6");
         if(StringUtils.isEmpty(everyRequest.getHeader("tokenPassword")))
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"session tokenPassword required");
 
+        logger.info("reached 7");
         String tokenId=everyRequest.getHeader("tokenId");
         String tokenPassword=everyRequest.getHeader("tokenPassword");
         logger.info("tokenId = " + tokenId);

@@ -13,5 +13,5 @@ public class Address {
 
     private String address;
 
-    private int user_id;
+    private int userId;
 }
