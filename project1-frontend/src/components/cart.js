@@ -2,7 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
-const CartPreview = () => {
+export default function Cart()
+{
   const { products, setProducts } = useState();
 //   const dispatch = useContext(CartDispatchContext);
 
@@ -59,5 +60,3 @@ const CartPreview = () => {
     </div>
   );
 };
-
-export default CartPreview;
