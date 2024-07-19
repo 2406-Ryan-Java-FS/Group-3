@@ -105,23 +105,23 @@ public class OrderService {
 
     public Map<String, Double> calculateTotalCostIncludingTaxesAndShipping(Integer orderId) {
         return orderRepository.findById(orderId)
-                .map(order -> {
-                    calculateOrderTotalAmount(order);
+            .map(order -> {
+                calculateOrderTotalAmount(order);
 
-                    Map<String, Double> totalDetails = new HashMap<>();
-                    Double totalAmount = order.getTotalAmount();
-                    if (totalAmount == null) {
-                        totalAmount = 0.0; // Default to 0 if totalAmount is null. Alternatively, throw an exception if this is unexpected.
-                        // throw new RuntimeException("Total amount is not set for order with id " + orderId);
-                    }
-                    double taxes = totalAmount * 0.10; // Assuming 10% tax
-                    double shipping = 50.0; // Flat rate shipping fee
-                    totalDetails.put("Total Amount", totalAmount);
-                    totalDetails.put("Taxes", taxes);
-                    totalDetails.put("Shipping", shipping);
-                    totalDetails.put("Final Total", totalAmount + taxes + shipping);
-                    return totalDetails;
-                }).orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
+                Map<String, Double> totalDetails = new HashMap<>();
+                Double totalAmount = order.getTotalAmount();
+                if (totalAmount == null) {
+                    totalAmount = 0.0; // Default to 0 if totalAmount is null. Alternatively, throw an exception if this is unexpected.
+                    // throw new RuntimeException("Total amount is not set for order with id " + orderId);
+                }
+                double taxes = totalAmount * 0.10; // Assuming 10% tax
+                double shipping = 50.0; // Flat rate shipping fee
+                totalDetails.put("Total Amount", totalAmount);
+                totalDetails.put("Taxes", taxes);
+                totalDetails.put("Shipping", shipping);
+                totalDetails.put("Final Total", totalAmount + taxes + shipping);
+                return totalDetails;
+            }).orElseThrow(() -> new RuntimeException("Order not found with id " + orderId));
     }
 
     public void calculateOrderTotalAmount(Order order) {

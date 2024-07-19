@@ -58,7 +58,7 @@ public class ProductController {
         Product newProd=new Product();
         newProd.setName(        productDTO.getName());
         newProd.setDescription( productDTO.getDescription());
-        newProd.setPrice(       productDTO.getPrice());
+        newProd.setPrice(       productDTO.getPrice().doubleValue());
         newProd.setCategory(existingCategory);
 
         Product saved = ps.addProduct(newProd);
